@@ -1,27 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://petzi53.github.io/quartopost/404.html</loc>
-  </url>
-  <url>
-    <loc>https://petzi53.github.io/quartopost/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://petzi53.github.io/quartopost/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://petzi53.github.io/quartopost/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://petzi53.github.io/quartopost/index.html</loc>
-  </url>
-  <url>
-    <loc>https://petzi53.github.io/quartopost/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://petzi53.github.io/quartopost/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://petzi53.github.io/quartopost/reference/quartopost.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://petzi53.github.io/qpost/404.html</loc></url>
+<url><loc>https://petzi53.github.io/qpost/AGENTS.html</loc></url>
+<url><loc>https://petzi53.github.io/qpost/LICENSE-text.html</loc></url>
+<url><loc>https://petzi53.github.io/qpost/LICENSE.html</loc></url>
+<url><loc>https://petzi53.github.io/qpost/articles/add-coins.html</loc></url>
+<url><loc>https://petzi53.github.io/qpost/articles/index.html</loc></url>
+<url><loc>https://petzi53.github.io/qpost/articles/qpost.html</loc></url>
+<url><loc>https://petzi53.github.io/qpost/authors.html</loc></url>
+<url><loc>https://petzi53.github.io/qpost/index.html</loc></url>
+<url><loc>https://petzi53.github.io/qpost/news/index.html</loc></url>
+<url><loc>https://petzi53.github.io/qpost/reference/add_coins.html</loc></url>
+<url><loc>https://petzi53.github.io/qpost/reference/index.html</loc></url>
+<url><loc>https://petzi53.github.io/qpost/reference/qpost.html</loc></url>
 </urlset>
+
