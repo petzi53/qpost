@@ -183,13 +183,13 @@ provide a pull request.
 
 # Articles
 
-### Get started
+### Articles
 
 - [Creating Quarto Blog Posts with
-  qpost](https://petzi53.github.io/qpost/articles/qpost.md):
+  qpost](https://petzi53.github.io/qpost/articles/quarto-blog-posts.md):
 
-  Learn how to use the qpost() function to interactively scaffold new
-  Quarto blog posts with properly formatted YAML front matter.
+  A detailed reference for the qpost() dialog: fields, configuration
+  options, output structure, and troubleshooting.
 
 - [Adding COinS Metadata for
   Zotero](https://petzi53.github.io/qpost/articles/add-coins.md):
