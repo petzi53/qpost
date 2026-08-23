@@ -52,6 +52,8 @@ For the full list of dialog fields, `.Rprofile` configuration options, generated
 
 ## Adding COinS metadata with `add_coins()`
 
+With COinS, you provide metadata from your blog posts to software tools like bibliography managers, enabling automatic retrieval and making it easier to cite your articles correctly.pkgdown::build_site(preview = FALSE, lazy = FALSE)
+
 Once a post is written, run:
 
 ```r
