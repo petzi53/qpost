@@ -48,14 +48,20 @@ citation information from rendered HTML.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">add_coins</span><span class="op">(</span>backup <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">add_coins</span><span class="op">(</span>file_path <span class="op">=</span> <span class="cn">NULL</span>, backup <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-backup">backup<a class="anchor" aria-label="anchor" href="#arg-backup"></a></dt>
+<dl><dt id="arg-file-path">file_path<a class="anchor" aria-label="anchor" href="#arg-file-path"></a></dt>
+<dd><p>Path to the <code>.qmd</code> file to process. If <code>NULL</code> (the
+default), the file is auto-detected as described in "Determining the
+Target File" below.</p></dd>
+
+
+<dt id="arg-backup">backup<a class="anchor" aria-label="anchor" href="#arg-backup"></a></dt>
 <dd><p>Logical. Create a <code>.bak</code> backup before modifying the file
 (default <code>TRUE</code>). Recommended for peace of mind during development.</p></dd>
 
@@ -104,19 +110,31 @@ string. This metadata is machine-readable but invisible in the browser.</p>
 the user is prompted to confirm overwrite, and a <code>.bak</code> backup is created.</p>
 </div>
 
+<div class="section">
+<h3 id="determining-the-target-file">Determining the Target File<a class="anchor" aria-label="anchor" href="#determining-the-target-file"></a></h3>
+
+
+<p><code>file_path</code> is resolved in this order:</p><ol><li><p>The <code>file_path</code> argument, if supplied.</p></li>
+<li><p>The active document in RStudio or Positron, via <code>rstudioapi</code>.</p></li>
+<li><p>An interactive file picker (<code><a href="https://rdrr.io/r/base/file.choose.html" class="external-link">file.choose()</a></code>) in other interactive
+R sessions (e.g. a plain R console).</p></li>
+<li><p>Otherwise, the function stops with a message asking for <code>file_path</code>
+to be supplied directly.</p></li>
+</ol></div>
+
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="co"># From an RStudio editor with a .qmd file open:</span></span></span>
+<span class="r-in"><span><span class="co"># From an RStudio or Positron editor with a .qmd file open:</span></span></span>
 <span class="r-in"><span><span class="fu">add_coins</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># To skip backup:</span></span></span>
 <span class="r-in"><span><span class="fu">add_coins</span><span class="op">(</span>backup <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># To manually process a file path (no RStudio required):</span></span></span>
-<span class="r-in"><span><span class="fu">generate_and_append_coins</span><span class="op">(</span><span class="st">"path/to/post.qmd"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># To process a file directly (no IDE required):</span></span></span>
+<span class="r-in"><span><span class="fu">add_coins</span><span class="op">(</span>file_path <span class="op">=</span> <span class="st">"path/to/post.qmd"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

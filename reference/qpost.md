@@ -1,7 +1,7 @@
-# Create a new quarto blog post
+# Create a New Quarto Blog Post
 
-`qpost()` opens a dialog window to input title and other desired data to
-create the file for the blog post.
+`qpost()` opens an interactive dialog for entering a post's title and
+other metadata, then scaffolds the corresponding blog post file.
 
 ## Usage
 
@@ -13,16 +13,22 @@ qpost()
 
 Nothing. What matters are the side effects:
 
-- create a folder in kebab notation with the name of date followed by
-  the post title
+- create a folder named with the date followed by the kebab-case post
+  title
 
-- create a "index.qmd" file
+- create an `index.qmd` file
 
 - copy the (optional) image file into the folder
 
-- populate the YAML field
+- populate the YAML front matter
 
-- open the new file in RStudio for editing
+- open the new file in RStudio or Positron for editing
+
+## Details
+
+`qpost()` requires a pane-capable IDE (RStudio or Positron) because it
+relies on rstudioapi to display the dialog and open the resulting file.
+It cannot be used in a plain R console or non-interactive script.
 
 ## Examples
 

@@ -8,10 +8,15 @@ and import citation information from rendered HTML.
 ## Usage
 
 ``` r
-add_coins(backup = TRUE)
+add_coins(file_path = NULL, backup = TRUE)
 ```
 
 ## Arguments
+
+- file_path:
+
+  Path to the `.qmd` file to process. If `NULL` (the default), the file
+  is auto-detected as described in "Determining the Target File" below.
 
 - backup:
 
@@ -63,17 +68,32 @@ If a COinS chunk already exists (detected by the label `coins-code`),
 the user is prompted to confirm overwrite, and a `.bak` backup is
 created.
 
+### Determining the Target File
+
+`file_path` is resolved in this order:
+
+1.  The `file_path` argument, if supplied.
+
+2.  The active document in RStudio or Positron, via `rstudioapi`.
+
+3.  An interactive file picker
+    ([`file.choose()`](https://rdrr.io/r/base/file.choose.html)) in
+    other interactive R sessions (e.g. a plain R console).
+
+4.  Otherwise, the function stops with a message asking for `file_path`
+    to be supplied directly.
+
 ## Examples
 
 ``` r
 if (FALSE) { # \dontrun{
-# From an RStudio editor with a .qmd file open:
+# From an RStudio or Positron editor with a .qmd file open:
 add_coins()
 
 # To skip backup:
 add_coins(backup = FALSE)
 
-# To manually process a file path (no RStudio required):
-generate_and_append_coins("path/to/post.qmd")
+# To process a file directly (no IDE required):
+add_coins(file_path = "path/to/post.qmd")
 } # }
 ```

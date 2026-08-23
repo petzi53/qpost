@@ -95,13 +95,24 @@
 <p><strong>Site status:</strong> Production-ready. All critical components verified. Optional enhancements (favicon, custom sidebar, analytics) deferred as non-essential.</p>
 <hr></div>
 <div class="section level2">
+<h2 id="step-6-progress-2026-08-23">Step 6 Progress (2026-08-23)<a class="anchor" aria-label="anchor" href="#step-6-progress-2026-08-23"></a></h2>
+<p>✅ <strong><code><a href="reference/qpost.html">qpost()</a></code> IDE guard clause</strong> - Added <code><a href="https://rstudio.github.io/rstudioapi/reference/isAvailable.html" class="external-link">rstudioapi::isAvailable()</a></code> check at the top of <code><a href="reference/qpost.html">qpost()</a></code>; stops with a clear error when run outside RStudio/Positron - Documented requirement in <code>@details</code> (<code>man/qpost.Rd</code>) and in the introductions of both <code>vignettes/qpost.Rmd</code> and <code>vignettes/quarto-blog-posts.Rmd</code> - Added <code>tests/testthat/test-qpost.R</code> using <code>local_mocked_bindings(isAvailable = ..., .package = "rstudioapi")</code></p>
+<p>✅ <strong>Local <code>R CMD check</code>: 0 errors | 0 warnings | 0 notes</strong> (fixed a stale <code>AGENTS.md</code>-at-top-level note and a <code>head</code>/<code>tail</code> visibility note that were present in an earlier check run — both were already resolved by existing <code>.Rbuildignore</code>/<code>utils::</code> qualifications, confirmed clean on re-check)</p>
+<p>✅ <strong><code>devtools::spell_check()</code></strong> — no real misspellings; all flagged words are proper nouns/technical terms (COinS, OpenURL, RStudio, Zotero, etc.)</p>
+<p>✅ <strong><code>urlchecker::url_check()</code></strong> — found and fixed 4 issues: - <code>DESCRIPTION</code>/<code>_pkgdown.yml</code> URL <code>https://petzi53.github.io/qpost/</code> redirected to the custom domain; <strong>canonical URL changed to <code>https://www.peter-baumgartner.net/qpost/</code></strong> in both files (user-confirmed choice) - <code>README.md</code>/<code>README.Rmd</code>: <code>community.rstudio.com</code> forum link moved to <code>forum.posit.co</code> - <code>vignettes/add-coins.Rmd</code>: dead NISO OpenURL standard link replaced with <code>https://www.niso.org/publications/z3988-2004-r2010</code> - <code>vignettes/add-coins.Rmd</code>: <code>zotero.org</code> → <code>www.zotero.org</code> (redirect) - Re-ran <code>url_check()</code> after fixes: all URLs resolve cleanly</p>
+<p>✅ <strong>CRAN quoting convention</strong> — added single quotes around software/product names not in the base dictionary in <code>DESCRIPTION</code>: <code>Title</code> → “Create a ‘Quarto’ Blog Post”; <code>Description</code> → <code>'RStudio'</code>, <code>'Quarto'</code>, <code>'Zotero'</code> now quoted</p>
+<p>✅ <strong><code>cran-comments.md</code></strong> updated with current results</p>
+<p>✅ <strong>win-builder submitted</strong> (2026-08-23) — both R-release and R-devel checks submitted via <code>devtools::check_win_release()</code> / <code>check_win_devel()</code>; results emailed to <a href="mailto:petzi53@gmail.com" class="email">petzi53@gmail.com</a> within ~15-30 minutes of submission</p>
+<p>⬜ <strong>R-hub check</strong> (<code>rhub::check_for_cran()</code>) — not yet run, awaiting user decision ⬜ <strong>Final submission</strong> (<code>devtools::submit_cran()</code>) — after win-builder/R-hub results reviewed</p>
+</div>
+<div class="section level2">
 <h2 id="next-steps">Next Steps<a class="anchor" aria-label="anchor" href="#next-steps"></a></h2>
 <ol style="list-style-type: decimal"><li>✅ Step 1: Rename package and functions</li>
 <li>✅ Step 2: Complete <code><a href="reference/add_coins.html">add_coins()</a></code> documentation</li>
 <li>✅ Step 3: Write tests</li>
 <li>✅ Step 4: Write vignettes</li>
 <li>✅ Step 5: Polish pkgdown site</li>
-<li>⬜ Step 6: CRAN preparation</li>
+<li>🔄 Step 6: CRAN preparation — win-builder submitted, awaiting results; R-hub and final submission still pending</li>
 </ol><hr></div>
 <div class="section level2">
 <h2 id="implementation-notes">Implementation Notes<a class="anchor" aria-label="anchor" href="#implementation-notes"></a></h2>

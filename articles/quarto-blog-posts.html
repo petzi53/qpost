@@ -68,6 +68,11 @@ you’re new to the package, start with <a href="qpost.html">Get started
 with qpost</a> for a quick introduction; come back here when you want
 the full picture of the dialog fields, configuration options, and
 troubleshooting steps.</p>
+<p><code><a href="../reference/qpost.html">qpost()</a></code> requires a pane-capable IDE —
+<strong>RStudio</strong> or <strong>Positron</strong> — because it uses
+<code>rstudioapi</code> to display the dialog and open the resulting
+file. Running it from a plain R console, <code>Rscript</code>, or a
+non-interactive script will raise an error.</p>
 <div class="figure" style="text-align: center">
 <img src="figures/qpost-dialog.png" class="r-plt" alt="Dialog window showing input fields for title, author, date and subtitle" width="75%"><p class="caption">
 The qpost() dialog window

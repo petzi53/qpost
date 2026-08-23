@@ -1,4 +1,4 @@
 # License
 
     YEAR: 2023
-    COPYRIGHT HOLDER: quartopost authors
+    COPYRIGHT HOLDER: Peter Baumgartner

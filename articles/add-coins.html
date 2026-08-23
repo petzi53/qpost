@@ -63,144 +63,16 @@ Baumgartner</h4>
 
     
     
+<p><code><a href="../reference/add_coins.html">add_coins()</a></code> appends <a href="https://en.wikipedia.org/wiki/COinS" class="external-link">COinS</a> metadata to a
+finished Quarto blog post so reference managers like Zotero can
+automatically detect it and import the title, author, date, and other
+citation details into your library.</p>
+<p>This article covers everyday usage first. If you want to understand
+what COinS actually is and why it works the way it does, see <a href="#background-what-is-coins">Background: What is COinS?</a> further
+down.</p>
 <div class="section level2">
-<h2 id="what-is-coins">What is COinS?<a class="anchor" aria-label="anchor" href="#what-is-coins"></a>
+<h2 id="using-add_coins">Using <code>add_coins()</code><a class="anchor" aria-label="anchor" href="#using-add_coins"></a>
 </h2>
-<p><strong>COinS</strong> stands for <strong>ContextObjects in
-Spans</strong>. It’s a simple, standardized way to embed bibliographic
-metadata directly into HTML pages so that specialized software can read
-and extract it.</p>
-<p>Think of it like this: when you visit a website, humans see the text
-and can understand what a blog post is about. But reference managers
-like Zotero need machine-readable metadata to know the title, author,
-publication date, and other citation details without requiring manual
-data entry.</p>
-<p>COinS solves this by embedding bibliographic information in an
-invisible HTML <code>&lt;span&gt;</code> element on your page. When
-Zotero visits your blog post, it detects the COinS metadata and can
-automatically add the post to your library with all the correct fields
-filled in.</p>
-<hr>
-</div>
-<div class="section level2">
-<h2 id="why-use-coins">Why Use COinS?<a class="anchor" aria-label="anchor" href="#why-use-coins"></a>
-</h2>
-<div class="section level3">
-<h3 id="the-problem">The Problem<a class="anchor" aria-label="anchor" href="#the-problem"></a>
-</h3>
-<p>Without COinS, Zotero has to guess your post’s metadata by examining
-the HTML structure. This often fails for blog posts because:</p>
-<ul>
-<li>Blog post titles might be in an <code>&lt;h1&gt;</code> tag, but so
-might many other things</li>
-<li>The publication date might be hidden in an obscure
-<code>&lt;time&gt;</code> element or embedded in a longer text
-string</li>
-<li>Authors are rarely marked up consistently across different blog
-platforms</li>
-<li>Categories or tags have no standard HTML representation</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="the-solution">The Solution<a class="anchor" aria-label="anchor" href="#the-solution"></a>
-</h3>
-<p>COinS eliminates guessing. When you add a COinS span to your post,
-Zotero can:</p>
-<ol style="list-style-type: decimal">
-<li>
-<strong>Automatically detect the post’s metadata</strong> — no
-manual entry needed</li>
-<li>
-<strong>Save the post to your personal library</strong> — with
-correct author, date, title, and keywords</li>
-<li>
-<strong>Use correct citation formatting</strong> — because Zotero
-knows the post is a blog article, not a book or journal article</li>
-<li>
-<strong>Reference it in your writing</strong> — Zotero generates
-correct citations in your preferred style (Chicago, APA, etc.)</li>
-</ol>
-<p>This is especially valuable for academic writers who rely on
-reference managers for literature management.</p>
-<hr>
-</div>
-</div>
-<div class="section level2">
-<h2 id="the-standard-behind-coins">The Standard Behind COinS<a class="anchor" aria-label="anchor" href="#the-standard-behind-coins"></a>
-</h2>
-<p>COinS is based on the <strong>OpenURL</strong> standard (ANSI/NISO
-Z39.88-2004), which was originally designed to help libraries link users
-to full-text content. The “ContextObject” is the standardized metadata
-package at the heart of OpenURL.</p>
-<p>The clever part of COinS is that it <strong>embeds an OpenURL
-ContextObject invisibly in HTML</strong> using a
-<code>&lt;span&gt;</code> element:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"Z3988"</span><span class="ot"> title</span><span class="op">=</span><span class="st">"ctx_ver=Z39.88-2004</span><span class="er">&amp;</span><span class="st">rft.title=...</span><span class="er">&amp;</span><span class="st">rft.au=..."</span><span class="dt">&gt;&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span></code></pre></div>
-<p>The <code>class="Z3988"</code> tells processors like Zotero that this
-span contains COinS metadata. The actual data is in the
-<code>title</code> attribute (which is counterintuitive—it’s not
-displayed as a tooltip; it’s just a container for the encoded
-metadata).</p>
-<div class="section level3">
-<h3 id="why-a-span">Why a span?<a class="anchor" aria-label="anchor" href="#why-a-span"></a>
-</h3>
-<p>Using a <code>&lt;span&gt;</code> allows COinS metadata to be placed
-anywhere in a web page without breaking the HTML structure or being
-visible to human readers. Other approaches (like storing metadata in
-<code>&lt;meta&gt;</code> tags in the page’s <code>&lt;head&gt;</code>)
-are more restrictive—you can only have one set of metadata per page.
-With COinS, you can embed metadata for multiple items on the same
-page.</p>
-<hr>
-</div>
-</div>
-<div class="section level2">
-<h2 id="websites-using-coins">Websites Using COinS<a class="anchor" aria-label="anchor" href="#websites-using-coins"></a>
-</h2>
-<p>COinS has been adopted by many major platforms and content
-providers:</p>
-<ul>
-<li>
-<strong>Wikipedia</strong> — embedded in citation templates and
-bibliographic data</li>
-<li>
-<strong>Academic repositories</strong> — CiteULike, Citebase,
-Hubmed, ResearchGate</li>
-<li>
-<strong>Library catalogs</strong> — Copac, WorldCat, VuFind</li>
-<li>
-<strong>Publishing platforms</strong> — WordPress blogs,
-Institutional repositories</li>
-<li>
-<strong>Specialized services</strong> — Zotero itself can generate
-COinS for shared bibliographies</li>
-</ul>
-<hr>
-</div>
-<div class="section level2">
-<h2 id="how-zotero-uses-coins">How Zotero Uses COinS<a class="anchor" aria-label="anchor" href="#how-zotero-uses-coins"></a>
-</h2>
-<p>When you’re browsing a blog post with COinS in your Zotero-enabled
-browser:</p>
-<ol style="list-style-type: decimal">
-<li>Zotero’s browser extension scans the page and finds the
-<code>&lt;span class="Z3988"&gt;</code> element</li>
-<li>It decodes the embedded metadata</li>
-<li>It displays a <strong>save icon</strong> (📖) in your browser
-address bar, indicating that Zotero can capture the page</li>
-<li>You click the icon to save the post to your library</li>
-<li>Zotero populates the entry with all the metadata from COinS: title,
-author, date, description, etc.</li>
-</ol>
-<p>Without COinS, Zotero might not recognize the page as a citable item,
-and you’d have to manually enter all the metadata.</p>
-<hr>
-</div>
-<div class="section level2">
-<h2 id="how-to-use-add_coins">How to Use add_coins()<a class="anchor" aria-label="anchor" href="#how-to-use-add_coins"></a>
-</h2>
-<p>The <code><a href="../reference/add_coins.html">add_coins()</a></code> function automates the entire
-process.</p>
 <div class="section level3">
 <h3 id="prerequisites">Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites"></a>
 </h3>
@@ -215,7 +87,7 @@ at least <code>site-url:</code> specified</li>
 <div class="section level3">
 <h3 id="basic-usage">Basic Usage<a class="anchor" aria-label="anchor" href="#basic-usage"></a>
 </h3>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/petzi53/qpost" class="external-link">qpost</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Add COinS to the currently open post in RStudio</span></span>
@@ -267,7 +139,7 @@ end</strong> of your post, so Zotero sees the complete content first</p>
 <p>By default, <code><a href="../reference/add_coins.html">add_coins()</a></code> reads everything it needs from
 your post YAML and <code>_quarto.yml</code>. You only need to configure
 <code>.Rprofile</code> for optional fallback values:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Project-level .Rprofile (in your blog's root directory)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span></span>
 <span>  qpost.lang <span class="op">=</span> <span class="st">"en"</span>,           <span class="co"># Fallback language if not in post or _quarto.yml</span></span>
@@ -326,13 +198,13 @@ Review and commit the changes</p>
 </h2>
 <p>By default, <code>add_coins(backup = TRUE)</code> creates a backup of
 your post before modifying it:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/add_coins.html">add_coins</a></span><span class="op">(</span>file_path <span class="op">=</span> <span class="st">"posts/my-post/index.qmd"</span>, backup <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>This creates a file like <code>posts/my-post/index.qmd.bak</code> as
 a safety measure. If something goes wrong, you can restore the
 original.</p>
 <p>To disable backups:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/add_coins.html">add_coins</a></span><span class="op">(</span>file_path <span class="op">=</span> <span class="st">"posts/my-post/index.qmd"</span>, backup <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <hr>
 </div>
@@ -364,6 +236,151 @@ URL-encoded - Your Zotero browser extension is enabled</p>
 <hr>
 </div>
 <div class="section level2">
+<h2 id="background-what-is-coins">Background: What is COinS?<a class="anchor" aria-label="anchor" href="#background-what-is-coins"></a>
+</h2>
+<p><strong>COinS</strong> stands for <strong>ContextObjects in
+Spans</strong>. It’s a simple, standardized way to embed bibliographic
+metadata directly into HTML pages so that specialized software can read
+and extract it.</p>
+<p>Think of it like this: when you visit a website, humans see the text
+and can understand what a blog post is about. But reference managers
+like Zotero need machine-readable metadata to know the title, author,
+publication date, and other citation details without requiring manual
+data entry.</p>
+<p>COinS solves this by embedding bibliographic information in an
+invisible HTML <code>&lt;span&gt;</code> element on your page. When
+Zotero visits your blog post, it detects the COinS metadata and can
+automatically add the post to your library with all the correct fields
+filled in.</p>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="why-use-coins">Why Use COinS?<a class="anchor" aria-label="anchor" href="#why-use-coins"></a>
+</h2>
+<p>With COinS, you provide metadata from your blog posts to software
+tools like bibliography managers, enabling automatic retrieval and
+making it easier to cite your articles correctly.</p>
+<div class="section level3">
+<h3 id="the-problem">The Problem<a class="anchor" aria-label="anchor" href="#the-problem"></a>
+</h3>
+<p>Without COinS, reference manager have to guess your post’s metadata
+by examining the HTML structure. This often fails for blog posts
+because:</p>
+<ul>
+<li>Blog post titles might be in an <code>&lt;h1&gt;</code> tag, but so
+might many other things</li>
+<li>The publication date might be hidden in an obscure
+<code>&lt;time&gt;</code> element or embedded in a longer text
+string</li>
+<li>Authors are rarely marked up consistently across different blog
+platforms</li>
+<li>Categories or tags have no standard HTML representation</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="the-solution">The Solution<a class="anchor" aria-label="anchor" href="#the-solution"></a>
+</h3>
+<p>COinS eliminates guessing. When you add a COinS span to your post,
+reference manager and many other bibliography software and services
+can:</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Automatically detect the post’s metadata</strong> — no
+manual entry needed</li>
+<li>
+<strong>Save the post to your personal library</strong> — with
+correct author, date, title, and keywords</li>
+<li>
+<strong>Use correct citation formatting</strong> — because software
+or service knows the post is a blog article, not a book or journal
+article</li>
+<li>
+<strong>Reference it in your writing</strong> — The software
+generates correct citations in your preferred style (Chicago, APA,
+etc.)</li>
+</ol>
+<p>This is especially valuable for academic writers who rely on
+reference managers for literature management.</p>
+<hr>
+</div>
+</div>
+<div class="section level2">
+<h2 id="the-standard-behind-coins">The Standard Behind COinS<a class="anchor" aria-label="anchor" href="#the-standard-behind-coins"></a>
+</h2>
+<p>COinS is based on the <strong>OpenURL</strong> standard (ANSI/NISO
+Z39.88-2004), which was originally designed to help libraries link users
+to full-text content. The “ContextObject” is the standardized metadata
+package at the heart of OpenURL.</p>
+<p>The clever part of COinS is that it <strong>embeds an OpenURL
+ContextObject invisibly in HTML</strong> using a
+<code>&lt;span&gt;</code> element:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"Z3988"</span><span class="ot"> title</span><span class="op">=</span><span class="st">"ctx_ver=Z39.88-2004</span><span class="er">&amp;</span><span class="st">rft.title=...</span><span class="er">&amp;</span><span class="st">rft.au=..."</span><span class="dt">&gt;&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span></code></pre></div>
+<p>The <code>class="Z3988"</code> tells processors like Zotero that this
+span contains COinS metadata. The actual data is in the
+<code>title</code> attribute (which is counterintuitive—it’s not
+displayed as a tooltip; it’s just a container for the encoded
+metadata).</p>
+<div class="section level3">
+<h3 id="why-a-span">Why a span?<a class="anchor" aria-label="anchor" href="#why-a-span"></a>
+</h3>
+<p>Using a <code>&lt;span&gt;</code> allows COinS metadata to be placed
+anywhere in a web page without breaking the HTML structure or being
+visible to human readers. Other approaches (like storing metadata in
+<code>&lt;meta&gt;</code> tags in the page’s <code>&lt;head&gt;</code>)
+are more restrictive—you can only have one set of metadata per page.
+With COinS, you can embed metadata for multiple items on the same
+page.</p>
+<hr>
+</div>
+</div>
+<div class="section level2">
+<h2 id="websites-using-coins">Websites Using COinS<a class="anchor" aria-label="anchor" href="#websites-using-coins"></a>
+</h2>
+<p>COinS has been adopted by many major platforms and content
+providers:</p>
+<ul>
+<li>
+<strong>Wikipedia</strong> — embedded in citation templates and
+bibliographic data</li>
+<li>
+<strong>Academic repositories</strong> — <a href="https://citeulike.org/" class="external-link">CiteULike</a>, <a href="https://www.semanticscholar.org/" class="external-link">Semantic Scholar</a>, <a href="https://pmc.ncbi.nlm.nih.gov/" class="external-link">PubMed Central</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/" class="external-link">PubMed</a>, <a href="https://www.researchgate.net/" class="external-link">ResearchGate</a>
+</li>
+<li>
+<strong>Bibliography managers</strong> — <a href="https://www.zotero.org/" class="external-link">Zotero</a>, <a href="https://zbib.org/" class="external-link">ZoteroBib</a>, <a href="https://bibdesk.sourceforge.io/" class="external-link">BibDesk</a>, <a href="https://www.mendeley.com/" class="external-link">Mendeley</a>, <a href="https://lumivero.com/products/citavi/" class="external-link">Citavi</a>
+</li>
+<li>
+<strong>Library catalogs</strong> — <a href="https://discover.libraryhub.jisc.ac.uk/" class="external-link">Library Hub Discover</a>,
+<a href="https://search.worldcat.org/" class="external-link">WorldCat</a>, <a href="https://vufind.org/vufind/" class="external-link">VuFind</a>
+</li>
+<li>
+<strong>Publishing platforms</strong> — WordPress blogs,
+Institutional repositories</li>
+<li>
+<strong>Specialized services</strong> — Zotero itself can generate
+COinS for shared bibliographies</li>
+</ul>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="how-zotero-uses-coins">How Zotero Uses COinS<a class="anchor" aria-label="anchor" href="#how-zotero-uses-coins"></a>
+</h2>
+<p>When you’re browsing a blog post with COinS in your Zotero-enabled
+browser:</p>
+<ol style="list-style-type: decimal">
+<li>Zotero’s browser extension scans the page and finds the
+<code>&lt;span class="Z3988"&gt;</code> element</li>
+<li>It decodes the embedded metadata</li>
+<li>It displays a <strong>save icon</strong> (📖) in your browser
+address bar, indicating that Zotero can capture the page</li>
+<li>You click the icon to save the post to your library</li>
+<li>Zotero populates the entry with all the metadata from COinS: title,
+author, date, description, etc.</li>
+</ol>
+<p>Without COinS, Zotero might not recognize the page as a citable item,
+and you’d have to manually enter all the metadata.</p>
+<hr>
+</div>
+<div class="section level2">
 <h2 id="integration-with-academic-workflow">Integration with Academic Workflow<a class="anchor" aria-label="anchor" href="#integration-with-academic-workflow"></a>
 </h2>
 <p>COinS is particularly valuable if you:</p>
@@ -388,7 +405,7 @@ with your posts as regular bibliographic items</li>
 </h2>
 <ul>
 <li>
-<a href="https://www.niso.org/standards/standard_detail.cfm?std_id=783" class="external-link">OpenURL
+<a href="https://www.niso.org/publications/z3988-2004-r2010" class="external-link">OpenURL
 Standard (Z39.88-2004)</a> — The official specification</li>
 <li>
 <a href="https://web.archive.org/web/20161223121044/http://www.ocoins.info/" class="external-link">COinS
@@ -409,8 +426,9 @@ Support: Saving Items</a> — How Zotero captures web content</li>
 <li>
 <a href="../reference/qpost.html"><code>qpost()</code></a> — Create
 new Quarto blog posts interactively</li>
-<li><a href="https://quarto.org/docs/websites/website-blog.html" class="external-link">Quarto
-Blog Documentation</a></li>
+<li>
+<a href="https://quarto.org/docs/websites/website-blog.html" class="external-link">Quarto
+Blog Documentation</a> </li>
 </ul>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

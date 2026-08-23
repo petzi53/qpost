@@ -13,9 +13,9 @@ formatted YAML front matter. It is being finalized for submission to
 CRAN.
 
 **Two public functions:** 1.
-[`qpost()`](https://petzi53.github.io/qpost/reference/qpost.md) —
-RStudio dialog for creating new blog posts 2.
-[`add_coins()`](https://petzi53.github.io/qpost/reference/add_coins.md)
+[`qpost()`](https://www.peter-baumgartner.net/qpost/reference/qpost.md)
+— RStudio dialog for creating new blog posts 2.
+[`add_coins()`](https://www.peter-baumgartner.net/qpost/reference/add_coins.md)
 — append COinS metadata for Zotero compatibility
 
 ------------------------------------------------------------------------
@@ -24,9 +24,9 @@ RStudio dialog for creating new blog posts 2.
 
 ✅ **Package rename:** `quartopost` → `qpost` ✅ **Function renames:** -
 `quartopost()` →
-[`qpost()`](https://petzi53.github.io/qpost/reference/qpost.md) -
+[`qpost()`](https://www.peter-baumgartner.net/qpost/reference/qpost.md) -
 `coins()` →
-[`add_coins()`](https://petzi53.github.io/qpost/reference/add_coins.md)
+[`add_coins()`](https://www.peter-baumgartner.net/qpost/reference/add_coins.md)
 (now exported)
 
 ✅ **Files updated:** - `R/qpost.R` — new file (renamed from
@@ -56,7 +56,7 @@ generated - Old `man/quartopost.Rd` — removed
 ## Step 2 Completion Summary (2026-08-22)
 
 ✅ **Enhanced
-[`add_coins()`](https://petzi53.github.io/qpost/reference/add_coins.md)
+[`add_coins()`](https://www.peter-baumgartner.net/qpost/reference/add_coins.md)
 roxygen documentation** - Added comprehensive title and description -
 Created detailed “Setup” subsection explaining `.Rprofile` configuration
 with `qpost.lang` and `qpost.license` options - Added “Auto-resolution
@@ -112,11 +112,11 @@ cleanup - `skip_on_cran()` for filesystem tests
 
 **Vignette 1: `vignettes/qpost.Rmd`** — “Creating Quarto Blog Posts with
 qpost” - Introduction and use cases for
-[`qpost()`](https://petzi53.github.io/qpost/reference/qpost.md) -
+[`qpost()`](https://www.peter-baumgartner.net/qpost/reference/qpost.md) -
 Detailed comparison with `quarto::new_blog_post()` (features table +
 workflow example) - Prerequisites and installation - Running
-[`qpost()`](https://petzi53.github.io/qpost/reference/qpost.md) from
-console and as RStudio Addin - Dialog form fields (required and
+[`qpost()`](https://www.peter-baumgartner.net/qpost/reference/qpost.md)
+from console and as RStudio Addin - Dialog form fields (required and
 optional) - Configuration via `.Rprofile` with option reference table -
 Output structure and generated YAML - Verbose output explanation -
 Troubleshooting section (3 common issues) - Next steps and links to
@@ -129,7 +129,7 @@ standard (Z39.88-2004) explained - Why COinS uses `<span>` elements
 instead of other approaches - List of major websites/services using
 COinS - How Zotero detects and uses COinS - Basic and configured usage
 of
-[`add_coins()`](https://petzi53.github.io/qpost/reference/add_coins.md) -
+[`add_coins()`](https://www.peter-baumgartner.net/qpost/reference/add_coins.md) -
 Detailed line-by-line explanation of generated COinS metadata -
 Auto-resolution hierarchy for metadata fields - Configuration example
 for `.Rprofile` - Editing and backup mode explanation - Testing
@@ -165,16 +165,68 @@ non-essential.
 
 ------------------------------------------------------------------------
 
+## Step 6 Progress (2026-08-23)
+
+✅
+**[`qpost()`](https://www.peter-baumgartner.net/qpost/reference/qpost.md)
+IDE guard clause** - Added
+[`rstudioapi::isAvailable()`](https://rstudio.github.io/rstudioapi/reference/isAvailable.html)
+check at the top of
+[`qpost()`](https://www.peter-baumgartner.net/qpost/reference/qpost.md);
+stops with a clear error when run outside RStudio/Positron - Documented
+requirement in `@details` (`man/qpost.Rd`) and in the introductions of
+both `vignettes/qpost.Rmd` and `vignettes/quarto-blog-posts.Rmd` - Added
+`tests/testthat/test-qpost.R` using
+`local_mocked_bindings(isAvailable = ..., .package = "rstudioapi")`
+
+✅ **Local `R CMD check`: 0 errors \| 0 warnings \| 0 notes** (fixed a
+stale `AGENTS.md`-at-top-level note and a `head`/`tail` visibility note
+that were present in an earlier check run — both were already resolved
+by existing `.Rbuildignore`/`utils::` qualifications, confirmed clean on
+re-check)
+
+✅ **`devtools::spell_check()`** — no real misspellings; all flagged
+words are proper nouns/technical terms (COinS, OpenURL, RStudio, Zotero,
+etc.)
+
+✅ **`urlchecker::url_check()`** — found and fixed 4 issues: -
+`DESCRIPTION`/`_pkgdown.yml` URL `https://petzi53.github.io/qpost/`
+redirected to the custom domain; **canonical URL changed to
+`https://www.peter-baumgartner.net/qpost/`** in both files
+(user-confirmed choice) - `README.md`/`README.Rmd`:
+`community.rstudio.com` forum link moved to `forum.posit.co` -
+`vignettes/add-coins.Rmd`: dead NISO OpenURL standard link replaced with
+`https://www.niso.org/publications/z3988-2004-r2010` -
+`vignettes/add-coins.Rmd`: `zotero.org` → `www.zotero.org` (redirect) -
+Re-ran `url_check()` after fixes: all URLs resolve cleanly
+
+✅ **CRAN quoting convention** — added single quotes around
+software/product names not in the base dictionary in `DESCRIPTION`:
+`Title` → “Create a ‘Quarto’ Blog Post”; `Description` → `'RStudio'`,
+`'Quarto'`, `'Zotero'` now quoted
+
+✅ **`cran-comments.md`** updated with current results
+
+✅ **win-builder submitted** (2026-08-23) — both R-release and R-devel
+checks submitted via `devtools::check_win_release()` /
+`check_win_devel()`; results emailed to <petzi53@gmail.com> within
+~15-30 minutes of submission
+
+⬜ **R-hub check** (`rhub::check_for_cran()`) — not yet run, awaiting
+user decision ⬜ **Final submission** (`devtools::submit_cran()`) —
+after win-builder/R-hub results reviewed
+
 ## Next Steps
 
 1.  ✅ Step 1: Rename package and functions
 2.  ✅ Step 2: Complete
-    [`add_coins()`](https://petzi53.github.io/qpost/reference/add_coins.md)
+    [`add_coins()`](https://www.peter-baumgartner.net/qpost/reference/add_coins.md)
     documentation
 3.  ✅ Step 3: Write tests
 4.  ✅ Step 4: Write vignettes
 5.  ✅ Step 5: Polish pkgdown site
-6.  ⬜ Step 6: CRAN preparation
+6.  🔄 Step 6: CRAN preparation — win-builder submitted, awaiting
+    results; R-hub and final submission still pending
 
 ------------------------------------------------------------------------
 

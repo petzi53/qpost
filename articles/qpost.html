@@ -75,9 +75,12 @@ formatted YAML front matter</li>
 finished post so reference managers like Zotero can automatically import
 it</li>
 </ul>
-<p>Both functions rely on <code>rstudioapi</code>, so they run in
-<strong>RStudio</strong> and in <strong>Positron</strong>, but not in
-plain VS Code or a terminal R session.</p>
+<p><code><a href="../reference/qpost.html">qpost()</a></code> opens an interactive dialog and <strong>requires
+a pane-capable IDE (RStudio or Positron)</strong>; it will stop with an
+error if run from a plain R console, <code>Rscript</code>, or a
+non-interactive script. <code><a href="../reference/add_coins.html">add_coins()</a></code> also auto-detects the
+active file in RStudio/Positron, but can be used from any R session by
+passing <code>file_path</code> explicitly.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -111,14 +114,16 @@ qpost</a>.</p>
 <div class="section level2">
 <h2 id="adding-coins-metadata-with-add_coins">Adding COinS metadata with <code>add_coins()</code><a class="anchor" aria-label="anchor" href="#adding-coins-metadata-with-add_coins"></a>
 </h2>
+<p>With COinS, you provide metadata from your blog posts to software
+tools like bibliography managers, enabling automatic retrieval and
+making it easier to cite your articles correctly.</p>
 <p>Once a post is written, run:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/add_coins.html">add_coins</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>on the currently open post (or pass <code>file_path</code>
-explicitly) to append a hidden COinS <code>&lt;span&gt;</code> at the
-end of the post. Zotero and similar tools detect this span and
-automatically fill in the title, author, date, and other citation
-details when saving your post to a library.</p>
+<p>on the currently open post to append a hidden COinS
+<code>&lt;span&gt;</code> at the end of the post. Zotero and similar
+tools detect this span and automatically fill in the title, author,
+date, and other citation details when saving your post to a library.</p>
 <p>For an explanation of what COinS is, why it matters, and how to
 configure auto-resolution of metadata fields, see <a href="add-coins.html">Adding COinS Metadata for Zotero</a>.</p>
 </div>

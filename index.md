@@ -6,9 +6,9 @@ To use this package you need to work in RStudio. The goal of `qpost` is
 to create and open a Quarto blog post with the appropriate YAML front
 matter in RStudio.
 
-[`qpost()`](https://petzi53.github.io/qpost/reference/qpost.md) displays
-a dialog window where you can enter the data for the YAML header of a
-new blog post.
+[`qpost()`](https://www.peter-baumgartner.net/qpost/reference/qpost.md)
+displays a dialog window where you can enter the data for the YAML
+header of a new blog post.
 
 ![Dialog windows shows input field for title, author, date and
 subtitle](reference/figures/qpost-dialog.png)
@@ -28,7 +28,8 @@ skeleton of a Quarto post. This includes:
 
 You can choose from your categories already created or add new
 categories. With the package comes also an RStudio Addin so you can bind
-the [`qpost()`](https://petzi53.github.io/qpost/reference/qpost.md)
+the
+[`qpost()`](https://www.peter-baumgartner.net/qpost/reference/qpost.md)
 command with a shortcut.
 
 ## Installation
@@ -90,9 +91,9 @@ options(qpost.author = "<your name>")
 ### Prevent confirmation question and verbose output
 
 If you want to prevent the confirmation question before
-[`qpost()`](https://petzi53.github.io/qpost/reference/qpost.md) creates
-the folder with the post, the YAML header and (optionally) copies your
-chosen image, add another line into `.Rprofile`:
+[`qpost()`](https://www.peter-baumgartner.net/qpost/reference/qpost.md)
+creates the folder with the post, the YAML header and (optionally)
+copies your chosen image, add another line into `.Rprofile`:
 
 ``` R
 options(qpost.verbose = FALSE)
@@ -133,9 +134,9 @@ I am not very experienced in R programming, so I am very grateful that I
 could take help and suggestions from different sources:
 
 I started with
-[`qpost()`](https://petzi53.github.io/qpost/reference/qpost.md) after a
-question or feature request at the [Posit
-forum](https://community.rstudio.com/t/template-or-addin-for-new-posts-in-quarto-blog/164735/2).
+[`qpost()`](https://www.peter-baumgartner.net/qpost/reference/qpost.md)
+after a question or feature request at the [Posit
+forum](https://forum.posit.co/t/template-or-addin-for-new-posts-in-quarto-blog/164735/2).
 I got some helpful links that I tried out and used as precursors for my
 implementation.
 
