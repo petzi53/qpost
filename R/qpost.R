@@ -1,6 +1,6 @@
 #' Create a new quarto blog post
 #'
-#' `quartopost()` opens a dialog window to input title and other
+#' `qpost()` opens a dialog window to input title and other
 #' desired data to create the file for the blog post.
 #'
 #' @return Nothing. What matters are the side effects:
@@ -12,9 +12,9 @@
 #' @export
 #'
 #' @examplesIf interactive()
-#' quartopost()
+#' qpost()
 #'
-quartopost <- function() {
+qpost <- function() {
   # check if it is a Quarto website and stop if not
   f <- readr::read_file("_quarto.yml")
   type_website <- stringr::str_extract(f, "type: website") == "type: website"
@@ -22,16 +22,16 @@ quartopost <- function() {
 
   ############ Get options from .Rprofile ######################
   # display YAML header in console before creating folder and file?
-  verbose <- ifelse(is.null(getOption("quartopost.verbose")),
-    TRUE, getOption("quartopost.verbose")
+  verbose <- ifelse(is.null(getOption("qpost.verbose")),
+    TRUE, getOption("qpost.verbose")
   )
 
-  draft <- ifelse(is.null(getOption("quartopost.draft")),
-                    TRUE, getOption("quartopost.draft")
+  draft <- ifelse(is.null(getOption("qpost.draft")),
+                    TRUE, getOption("qpost.draft")
   )
 
-  show_empty_fields <- ifelse(is.null(getOption("quartopost.show_empty_fields")),
-                           TRUE, getOption("quartopost.show_empty_fields")
+  show_empty_fields <- ifelse(is.null(getOption("qpost.show_empty_fields")),
+                           TRUE, getOption("qpost.show_empty_fields")
   )
   ##############################################################
 

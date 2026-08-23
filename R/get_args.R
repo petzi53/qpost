@@ -31,7 +31,7 @@ get_args <- function() {
             shiny::textInput(
               inputId = "author",
               label = "Author",
-              value = getOption("quartopost.author"),
+              value = getOption("qpost.author"),
               placeholder = "Author of this post"
             ),
             shiny::dateInput(

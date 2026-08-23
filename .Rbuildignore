@@ -1,4 +1,6 @@
-^quartopost\.Rproj$
+^renv$
+^renv\.lock$
+^qpost\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
 ^README\.Rmd$
@@ -8,3 +10,5 @@
 ^\.github$
 ^my_archive$
 ^cran-comments\.md$
+^\.posit$
+^\.posit/assistant$

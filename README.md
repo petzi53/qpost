@@ -1,25 +1,26 @@
 
-# quartopost
+# qpost
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/petzi53/quartopost/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/petzi53/quartopost/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/petzi53/qpost/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/petzi53/qpost/actions/workflows/R-CMD-check.yaml)
 
 <!-- badges: end -->
 
 ## Goal
 
-To use this package you need to work in RStudio. The goal of
-`quartopost` is to create and open a Quarto blog post with the
-appropriate YAML front matter in RStudio.
+To use this package you need to work in RStudio. The goal of `qpost` is
+to create and open a Quarto blog post with the appropriate YAML front
+matter in RStudio.
 
-`quartopost()` displays a dialog window where you can enter the data for
-the YAML header of a new blog post.
+`qpost()` displays a dialog window where you can enter the data for the
+YAML header of a new blog post.
 
 <div class="figure" style="text-align: center">
 
 <img src="man/figures/README-shiny-dialog-window.png" alt="Dialog windows shows input field for title, author, date and subtitle" width="50%" />
 <p class="caption">
+
 Dialog window for creating a blog post
 </p>
 
@@ -38,31 +39,38 @@ skeleton of a Quarto post. This includes:
 
 You can choose from your categories already created or add new
 categories. With the package comes also an RStudio Addin so you can bind
-the `quartopost()` command with a shortcut.
+the `qpost()` command with a shortcut.
 
 ## Installation
 
-You can install the development version of `quartopost` from
-[GitHub](https://github.com/) with:
+You can install the package from [CRAN](https://cran.r-project.org/)
+with:
+
+``` r
+install.packages("qpost")
+```
+
+Or install the development version from [GitHub](https://github.com/)
+with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("petzi53/quartopost")
+devtools::install_github("petzi53/qpost")
 ```
 
 ## Example
 
 ``` r
-library(quartopost)
+library(qpost)
 
 if (interactive()) {
-  quartopost()
+  qpost()
 }
 ```
 
 ## Possible Configurations
 
-To create Quarto posts even easier, you can configure `quartopost`:
+To create Quarto posts even easier, you can configure `qpost`:
 
 ### Provide a shortcut
 
@@ -82,19 +90,17 @@ to the author field automatically.
 
 <!-- -->
 
-    options(servr.daemon = TRUE,
-        quartopost.author = "<your name>" 
-    )
+    options(qpost.author = "<your name>")
 
 - Restart RStudio.
 
 ### Prevent confirmation question and verbose output
 
-If you want to prevent the confirmation question before `quartopost()`
+If you want to prevent the confirmation question before `qpost()`
 creates the folder with the post, the YAML header and (optionally)
 copies your chosen image, add another line into `.Rprofile`:
 
-    quartopost.verbose = FALSE 
+    options(qpost.verbose = FALSE)
 
 ### Define the draft status of the created file
 
@@ -114,11 +120,11 @@ displayed in the YAML front matter.
 If you are going to add all lines to .`RProfile`, then your code
 snippets should look like:
 
-    options(servr.daemon = TRUE,
-        quartopost.author = "Peter Baumgartner", # default = ""
-        quartopost.verbose = FALSE,              # default = TRUE
-        quartopost.draft = FALSE,                # default = TRUE
-        quartopost.show_empty_fields = FALSE     # default = TRUE 
+    options(
+        qpost.author = "Peter Baumgartner",      # default = ""
+        qpost.verbose = FALSE,                   # default = TRUE
+        qpost.draft = FALSE,                     # default = TRUE
+        qpost.show_empty_fields = FALSE          # default = TRUE 
     )
 
 Do not forget to restart RStudio after you changed `.Rprofile`!
@@ -128,7 +134,7 @@ Do not forget to restart RStudio after you changed `.Rprofile`!
 I am not very experienced in R programming, so I am very grateful that I
 could take help and suggestions from different sources:
 
-I started with `quartopost()` after a question or feature request at
+I started with `qpost()` after a question or feature request at
 the [Posit
 forum](https://community.rstudio.com/t/template-or-addin-for-new-posts-in-quarto-blog/164735/2).
 I got some helpful links that I tried out and used as precursors for my
@@ -153,11 +159,11 @@ when it comes to Shiny apps. (I just started reading the fantastic
 [Mastering Shiny book by Hadley Wickham](https://mastering-shiny.org/).)
 I took the general structure of the Shiny window from the blogdown “New
 Post” RStudio addin by Yihui Xie. The lack of a similar function for
-Quarto was generally my main incentive to start with the quartopost
-project in the first place.
+Quarto was generally my main incentive to start with the qpost project
+in the first place.
 
-I don’t want to release my package to CRAN, but I tried to follow the
-advises of [R Packages](https://r-pkgs.org/).
+I tried to follow the advises of [R Packages](https://r-pkgs.org/) in
+preparing this package for CRAN.
 
 ## Contribution is welcome!
 

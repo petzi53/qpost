@@ -1,6 +1,3 @@
-# convert to latin-ascii (first line) and then
-# convert to kebab case and
-# remove non space or alphanumeric characters
 title_kebab <- function(title) {
   # https://stackoverflow.com/a/38171652/7322615
   stringi::stri_trans_general((title), "latin-ascii") |>
@@ -10,14 +7,12 @@ title_kebab <- function(title) {
 }
 
 
-# wrap description at 77 characters (are URLs allowed?)
 long_yaml_text <- function(txt) {
   stringr::str_wrap(txt, width = 77) |>
     stringr::str_replace_all("[\n]", "\n  ")
 }
 
 
-# formatting for long or empty description
 prepare_description <- function(txt) {
   ifelse(txt != "",
     paste0("description:  |\n  ", long_yaml_text(txt)),
@@ -25,25 +20,28 @@ prepare_description <- function(txt) {
   )
 }
 
-# check if an image is provided
 prepare_image_name <- function(txt) {
   ifelse(is.null(txt), "", txt$name)
 }
 
-# flatten categories vector
 prepare_categories <- function(cat, new) {
-  # added incorrectly a comma at the end of new categories?
-  stringr::str_trim(new)
+  # Trim whitespace from new categories
+  new <- stringr::str_trim(new)
+  # Remove accidental trailing comma
   if (stringr::str_ends(new, ",")) {
     new <- stringr::str_sub(new, end = -2L)
   }
-
-  cat <- stringr::str_sort(c(cat, new)) |>
+  # Split comma-separated new entries and trim each
+  new_cats <- stringr::str_split_1(new, ",") |>
+    stringr::str_trim()
+  # Combine, drop empty strings, sort, flatten
+  c(cat, new_cats) |>
+    stringr::str_subset(".+") |>
+    stringr::str_sort() |>
     stringr::str_flatten(collapse = ", ")
 }
 
 
-# build YAML
 prepare_yaml <- function(args, desc,
                          img_name, cats, draft, fields) {
   # if show_empty_fields == TRUE
@@ -90,10 +88,6 @@ prepare_yaml <- function(args, desc,
 
 }
 
-# extract categories from yaml with square brackets
-# look for "categories:" AND followed by zero or more white-space characters AND
-# "[" AND followed by zero or more character class of white-space and nonwhite characters AND
-# finally followed by the closing bracket "]"
 extract_cat_brackets <- function(f) {
   stringr::str_extract(f, "categories:\\s*\\[[\\s\\S]*\\]") |>
     stringr::str_remove("categories:\\s*\\[") |>
@@ -103,7 +97,6 @@ extract_cat_brackets <- function(f) {
     stringr::str_trim()
 }
 
-# extract categories from yaml with dashed
 extract_cat_dashes <- function(f) {
   stringr::str_remove(f, "^[\\s\\S]*categories:\\s") |>
     stringr::str_remove("\\n[:alpha:].*\\n(.*)\\n---") |>
@@ -114,7 +107,6 @@ extract_cat_dashes <- function(f) {
 }
 
 
-# collect categories
 get_cat <- function() {
   f_list <- list()
   cat_vec <- NULL

@@ -3,5 +3,8 @@
 .Rdata
 .httr-oauth
 .DS_Store
+README.html
 docs
 my_archive
+.posit/assistant/
+inst/doc

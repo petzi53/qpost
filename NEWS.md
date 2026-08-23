@@ -1,3 +1,10 @@
+# qpost 1.0.0
+
+* Package renamed from `quartopost` to `qpost`
+* Main function renamed from `quartopost()` to `qpost()`
+* New exported function `add_coins()` for COinS metadata generation
+* All option names updated from `quartopost.*` prefix to `qpost.*`
+
 # quartopost 0.3.0
 
 * New UI: Bigger window holds all fields in one tab

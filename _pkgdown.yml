@@ -1,4 +1,21 @@
-url: https://petzi53.github.io/quartopost/
+url: https://petzi53.github.io/qpost/
+
 template:
   bootstrap: 5
 
+navbar:
+  right:
+    - icon: fa-github
+      href: https://github.com/petzi53/qpost
+
+reference:
+  - title: "Main functions"
+    contents:
+      - qpost
+      - add_coins
+
+articles:
+  - title: "Get started"
+    contents:
+      - qpost
+      - add-coins
