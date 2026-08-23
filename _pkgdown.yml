@@ -1,4 +1,4 @@
-url: https://petzi53.github.io/qpost/
+url: https://www.peter-baumgartner.net/qpost/
 
 template:
   bootstrap: 5
@@ -17,5 +17,6 @@ reference:
 articles:
   - title: "Articles"
     contents:
+      - qpost
       - quarto-blog-posts
       - add-coins

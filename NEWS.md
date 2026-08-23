@@ -3,6 +3,7 @@
 * Package renamed from `quartopost` to `qpost`
 * Main function renamed from `quartopost()` to `qpost()`
 * New exported function `add_coins()` for COinS metadata generation
+* `add_coins()` gains a `file_path` argument, so it can be used outside RStudio/Positron by passing the target file explicitly
 * All option names updated from `quartopost.*` prefix to `qpost.*`
 
 # quartopost 0.3.0

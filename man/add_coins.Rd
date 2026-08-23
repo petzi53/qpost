@@ -4,9 +4,13 @@
 \alias{add_coins}
 \title{Generate and append COinS metadata to a Quarto post}
 \usage{
-add_coins(backup = TRUE)
+add_coins(file_path = NULL, backup = TRUE)
 }
 \arguments{
+\item{file_path}{Path to the \code{.qmd} file to process. If \code{NULL} (the
+default), the file is auto-detected as described in "Determining the
+Target File" below.}
+
 \item{backup}{Logical. Create a \code{.bak} backup before modifying the file
 (default \code{TRUE}). Recommended for peace of mind during development.}
 }
@@ -58,16 +62,29 @@ string. This metadata is machine-readable but invisible in the browser.
 If a COinS chunk already exists (detected by the label \code{coins-code}),
 the user is prompted to confirm overwrite, and a \code{.bak} backup is created.
 }
+
+\subsection{Determining the Target File}{
+
+\code{file_path} is resolved in this order:
+\enumerate{
+\item The \code{file_path} argument, if supplied.
+\item The active document in RStudio or Positron, via \code{rstudioapi}.
+\item An interactive file picker (\code{file.choose()}) in other interactive
+R sessions (e.g. a plain R console).
+\item Otherwise, the function stops with a message asking for \code{file_path}
+to be supplied directly.
+}
+}
 }
 \examples{
 \dontrun{
-# From an RStudio editor with a .qmd file open:
+# From an RStudio or Positron editor with a .qmd file open:
 add_coins()
 
 # To skip backup:
 add_coins(backup = FALSE)
 
-# To manually process a file path (no RStudio required):
-generate_and_append_coins("path/to/post.qmd")
+# To process a file directly (no IDE required):
+add_coins(file_path = "path/to/post.qmd")
 }
 }

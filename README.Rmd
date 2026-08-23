@@ -146,7 +146,7 @@ could take help and suggestions from different sources:
 
 I started with `qpost()` after a question or feature request at
 the [Posit
-forum](https://community.rstudio.com/t/template-or-addin-for-new-posts-in-quarto-blog/164735/2).
+forum](https://forum.posit.co/t/template-or-addin-for-new-posts-in-quarto-blog/164735/2).
 I got some helpful links that I tried out and used as precursors for my
 implementation.
 

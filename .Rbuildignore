@@ -13,3 +13,4 @@
 ^cran-comments\.md$
 ^\.posit$
 ^\.posit/assistant$
+^AGENTS\.md$

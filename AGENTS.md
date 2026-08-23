@@ -163,6 +163,46 @@ The `qpost` package is an R package for RStudio that provides an interactive dia
 
 ---
 
+## Step 6 Progress (2026-08-23)
+
+✅ **`qpost()` IDE guard clause**
+- Added `rstudioapi::isAvailable()` check at the top of `qpost()`; stops with a clear
+  error when run outside RStudio/Positron
+- Documented requirement in `@details` (`man/qpost.Rd`) and in the introductions of
+  both `vignettes/qpost.Rmd` and `vignettes/quarto-blog-posts.Rmd`
+- Added `tests/testthat/test-qpost.R` using `local_mocked_bindings(isAvailable = ..., .package = "rstudioapi")`
+
+✅ **Local `R CMD check`: 0 errors | 0 warnings | 0 notes** (fixed a stale `AGENTS.md`-at-top-level
+  note and a `head`/`tail` visibility note that were present in an earlier check run —
+  both were already resolved by existing `.Rbuildignore`/`utils::` qualifications, confirmed
+  clean on re-check)
+
+✅ **`devtools::spell_check()`** — no real misspellings; all flagged words are proper
+  nouns/technical terms (COinS, OpenURL, RStudio, Zotero, etc.)
+
+✅ **`urlchecker::url_check()`** — found and fixed 4 issues:
+- `DESCRIPTION`/`_pkgdown.yml` URL `https://petzi53.github.io/qpost/` redirected to
+  the custom domain; **canonical URL changed to `https://www.peter-baumgartner.net/qpost/`**
+  in both files (user-confirmed choice)
+- `README.md`/`README.Rmd`: `community.rstudio.com` forum link moved to `forum.posit.co`
+- `vignettes/add-coins.Rmd`: dead NISO OpenURL standard link replaced with
+  `https://www.niso.org/publications/z3988-2004-r2010`
+- `vignettes/add-coins.Rmd`: `zotero.org` → `www.zotero.org` (redirect)
+- Re-ran `url_check()` after fixes: all URLs resolve cleanly
+
+✅ **CRAN quoting convention** — added single quotes around software/product names not
+  in the base dictionary in `DESCRIPTION`: `Title` → "Create a 'Quarto' Blog Post";
+  `Description` → `'RStudio'`, `'Quarto'`, `'Zotero'` now quoted
+
+✅ **`cran-comments.md`** updated with current results
+
+✅ **win-builder submitted** (2026-08-23) — both R-release and R-devel checks submitted via
+  `devtools::check_win_release()` / `check_win_devel()`; results emailed to petzi53@gmail.com
+  within ~15-30 minutes of submission
+
+⬜ **R-hub check** (`rhub::check_for_cran()`) — not yet run, awaiting user decision
+⬜ **Final submission** (`devtools::submit_cran()`) — after win-builder/R-hub results reviewed
+
 ## Next Steps
 
 1. ✅ Step 1: Rename package and functions
@@ -170,7 +210,8 @@ The `qpost` package is an R package for RStudio that provides an interactive dia
 3. ✅ Step 3: Write tests
 4. ✅ Step 4: Write vignettes
 5. ✅ Step 5: Polish pkgdown site
-6. ⬜ Step 6: CRAN preparation
+6. 🔄 Step 6: CRAN preparation — win-builder submitted, awaiting results; R-hub and final
+   submission still pending
 
 ---
 

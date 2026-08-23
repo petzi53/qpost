@@ -35,8 +35,8 @@ format_author <- function(author_entry) {
         parts <- stringr::str_split(author_entry, "\\s+")[[1]]
         if (length(parts) >= 2) {
             stringr::str_c(
-                tail(parts, 1),
-                stringr::str_c(head(parts, -1), collapse = " "),
+                utils::tail(parts, 1),
+                stringr::str_c(utils::head(parts, -1), collapse = " "),
                 sep = ", "
             )
         } else {
@@ -407,6 +407,19 @@ generate_and_append_coins <- function(file_path, backup = TRUE) {
 #' If a COinS chunk already exists (detected by the label `coins-code`),
 #' the user is prompted to confirm overwrite, and a `.bak` backup is created.
 #'
+#' ## Determining the Target File
+#'
+#' `file_path` is resolved in this order:
+#' 1. The `file_path` argument, if supplied.
+#' 2. The active document in RStudio or Positron, via `rstudioapi`.
+#' 3. An interactive file picker (`file.choose()`) in other interactive
+#'    R sessions (e.g. a plain R console).
+#' 4. Otherwise, the function stops with a message asking for `file_path`
+#'    to be supplied directly.
+#'
+#' @param file_path Path to the `.qmd` file to process. If `NULL` (the
+#'   default), the file is auto-detected as described in "Determining the
+#'   Target File" below.
 #' @param backup Logical. Create a `.bak` backup before modifying the file
 #'   (default `TRUE`). Recommended for peace of mind during development.
 #'
@@ -416,35 +429,56 @@ generate_and_append_coins <- function(file_path, backup = TRUE) {
 #'
 #' @examples
 #' \dontrun{
-#' # From an RStudio editor with a .qmd file open:
+#' # From an RStudio or Positron editor with a .qmd file open:
 #' add_coins()
 #'
 #' # To skip backup:
 #' add_coins(backup = FALSE)
 #'
-#' # To manually process a file path (no RStudio required):
-#' generate_and_append_coins("path/to/post.qmd")
+#' # To process a file directly (no IDE required):
+#' add_coins(file_path = "path/to/post.qmd")
 #' }
 #' @export
 
-add_coins <- function(backup = TRUE) {
-    if (!rstudioapi::isAvailable()) {
+add_coins <- function(file_path = NULL, backup = TRUE) {
+    if (is.null(file_path)) {
+        file_path <- resolve_target_file()
+    }
+
+    if (!fs::file_exists(file_path)) {
+        stop("File not found: ", file_path, call. = FALSE)
+    }
+
+    generate_and_append_coins(file_path, backup = backup)
+}
+
+# ── Resolve the target file when file_path is not supplied ────────────────────
+resolve_target_file <- function() {
+    # rstudioapi::isAvailable() returns TRUE in both RStudio and Positron
+    # (Positron ships an rstudioapi compatibility shim).
+    if (rstudioapi::isAvailable()) {
+        target_file <- rstudioapi::getActiveDocumentContext()$path
+
+        if (nzchar(target_file)) {
+            return(target_file)
+        }
+
         stop(
-            "add_coins() requires RStudio. ",
-            "Call generate_and_append_coins(file_path) directly.",
+            "No active file detected. Open the target .qmd in the editor first, ",
+            "or call add_coins(file_path = ...) directly.",
             call. = FALSE
         )
     }
 
-    target_file <- rstudioapi::getSourceEditorContext()$path
-
-    if (!nzchar(target_file)) {
-        stop(
-            "No active file detected. Open the target .qmd in the editor first.",
-            call. = FALSE
-        )
+    if (interactive()) {
+        target_file <- file.choose()
+        return(target_file)
     }
 
-    generate_and_append_coins(target_file, backup = backup)
+    stop(
+        "add_coins() could not detect a target file. ",
+        "Call add_coins(file_path = \"path/to/post.qmd\") directly.",
+        call. = FALSE
+    )
 }
 

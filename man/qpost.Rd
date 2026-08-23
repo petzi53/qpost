@@ -2,23 +2,28 @@
 % Please edit documentation in R/qpost.R
 \name{qpost}
 \alias{qpost}
-\title{Create a new quarto blog post}
+\title{Create a New Quarto Blog Post}
 \usage{
 qpost()
 }
 \value{
 Nothing. What matters are the side effects:
 \itemize{
-\item create a folder in kebab notation with the name of date followed by the post title
-\item create a "index.qmd" file
+\item create a folder named with the date followed by the kebab-case post title
+\item create an \code{index.qmd} file
 \item copy the (optional) image file into the folder
-\item populate the YAML field
-\item open the new file in RStudio for editing
+\item populate the YAML front matter
+\item open the new file in RStudio or Positron for editing
 }
 }
 \description{
-\code{qpost()} opens a dialog window to input title and other
-desired data to create the file for the blog post.
+\code{qpost()} opens an interactive dialog for entering a post's title and
+other metadata, then scaffolds the corresponding blog post file.
+}
+\details{
+\code{qpost()} requires a pane-capable IDE (RStudio or Positron) because it
+relies on \pkg{rstudioapi} to display the dialog and open the resulting
+file. It cannot be used in a plain R console or non-interactive script.
 }
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}

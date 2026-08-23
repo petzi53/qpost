@@ -209,7 +209,7 @@ COinS has been adopted by many major platforms and content providers:
 
 - **Wikipedia** — embedded in citation templates and bibliographic data
 - **Academic repositories** — [CiteULike](https://citeulike.org/), [Semantic Scholar](https://www.semanticscholar.org/), [PubMed Central](https://pmc.ncbi.nlm.nih.gov/), [PubMed](https://pubmed.ncbi.nlm.nih.gov/), [ResearchGate](https://www.researchgate.net/)
-- **Bibliography managers** — [Zotero](https://zotero.org), [ZoteroBib](https://zbib.org/), [BibDesk](https://bibdesk.sourceforge.io/), [Mendeley](https://www.mendeley.com/), [Citavi](https://lumivero.com/products/citavi/)
+- **Bibliography managers** — [Zotero](https://www.zotero.org/), [ZoteroBib](https://zbib.org/), [BibDesk](https://bibdesk.sourceforge.io/), [Mendeley](https://www.mendeley.com/), [Citavi](https://lumivero.com/products/citavi/)
 - **Library catalogs** — [Library Hub Discover](https://discover.libraryhub.jisc.ac.uk/), [WorldCat](https://search.worldcat.org/), [VuFind](https://vufind.org/vufind/)
 - **Publishing platforms** — WordPress blogs, Institutional repositories
 - **Specialized services** — Zotero itself can generate COinS for shared bibliographies
@@ -243,7 +243,7 @@ COinS is particularly valuable if you:
 
 ## Further Reading
 
-- [OpenURL Standard (Z39.88-2004)](https://www.niso.org/standards/standard_detail.cfm?std_id=783) — The official specification
+- [OpenURL Standard (Z39.88-2004)](https://www.niso.org/publications/z3988-2004-r2010) — The official specification
 - [COinS Specification (Wayback Archive)](https://web.archive.org/web/20161223121044/http://www.ocoins.info/) — Original COinS documentation
 - [Zotero Browser Extension](https://www.zotero.org/download/) — Download and documentation
 - [Zotero Support: Saving Items](https://www.zotero.org/support/adding_items_to_zotero) — How Zotero captures web content

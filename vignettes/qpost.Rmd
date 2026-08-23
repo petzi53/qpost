@@ -25,7 +25,7 @@ The **qpost** package provides two functions for maintaining a Quarto blog:
 - `qpost()` — an interactive dialog that scaffolds a new blog post directory, `index.qmd` file, and correctly formatted YAML front matter
 - `add_coins()` — appends [COinS](https://en.wikipedia.org/wiki/COinS) metadata to a finished post so reference managers like Zotero can automatically import it
 
-Both functions rely on `rstudioapi`, so they run in **RStudio** and in **Positron**, but not in plain VS Code or a terminal R session.
+`qpost()` opens an interactive dialog and **requires a pane-capable IDE (RStudio or Positron)**; it will stop with an error if run from a plain R console, `Rscript`, or a non-interactive script. `add_coins()` also auto-detects the active file in RStudio/Positron, but can be used from any R session by passing `file_path` explicitly.
 
 ## Installation
 
@@ -52,7 +52,7 @@ For the full list of dialog fields, `.Rprofile` configuration options, generated
 
 ## Adding COinS metadata with `add_coins()`
 
-With COinS, you provide metadata from your blog posts to software tools like bibliography managers, enabling automatic retrieval and making it easier to cite your articles correctly.pkgdown::build_site(preview = FALSE, lazy = FALSE)
+With COinS, you provide metadata from your blog posts to software tools like bibliography managers, enabling automatic retrieval and making it easier to cite your articles correctly.
 
 Once a post is written, run:
 
@@ -60,7 +60,7 @@ Once a post is written, run:
 add_coins()
 ```
 
-on the currently open post (or pass `file_path` explicitly) to append a hidden COinS `<span>` at the end of the post. Zotero and similar tools detect this span and automatically fill in the title, author, date, and other citation details when saving your post to a library.
+on the currently open post to append a hidden COinS `<span>` at the end of the post. Zotero and similar tools detect this span and automatically fill in the title, author, date, and other citation details when saving your post to a library.
 
 For an explanation of what COinS is, why it matters, and how to configure auto-resolution of metadata fields, see [Adding COinS Metadata for Zotero](add-coins.html).
 

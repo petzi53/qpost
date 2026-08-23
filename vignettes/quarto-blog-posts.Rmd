@@ -22,6 +22,8 @@ knitr::opts_chunk$set(
 
 This article is a detailed reference for `qpost()`. If you're new to the package, start with [Get started with qpost](qpost.html) for a quick introduction; come back here when you want the full picture of the dialog fields, configuration options, and troubleshooting steps.
 
+`qpost()` requires a pane-capable IDE — **RStudio** or **Positron** — because it uses `rstudioapi` to display the dialog and open the resulting file. Running it from a plain R console, `Rscript`, or a non-interactive script will raise an error.
+
 ```{r dialog-screenshot, fig.align='center', out.width='75%', echo=FALSE, fig.cap='The qpost() dialog window', fig.alt='Dialog window showing input fields for title, author, date and subtitle'}
 knitr::include_graphics("figures/qpost-dialog.png")
 ```

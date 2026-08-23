@@ -1,15 +1,16 @@
 Package: qpost
-Title: Create a Quarto Blog Post
+Title: Create a 'Quarto' Blog Post
 Version: 1.0.0
 Authors@R: 
     person("Peter", "Baumgartner", , "petzi53@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0003-4526-8791"))
-Description: Provides an interactive RStudio dialog for creating Quarto blog posts with correctly structured YAML front matter. The dialog collects title, author, date, categories, and other metadata, then scaffolds the post directory, creates the 'index.qmd' file, and optionally copies an image. A companion function appends COinS (ContextObjects in Spans) metadata to posts for automatic bibliographic import into reference managers such as Zotero.
+Description: Provides an interactive 'RStudio' dialog for creating 'Quarto' blog posts with correctly structured YAML front matter. The dialog collects title, author, date, categories, and other metadata, then scaffolds the post directory, creates the 'index.qmd' file, and optionally copies an image. A companion function appends COinS (ContextObjects in Spans) metadata to posts for automatic bibliographic import into reference managers such as 'Zotero'.
 License: MIT + file LICENSE
 Encoding: UTF-8
+Depends: R (>= 4.1.0)
 Roxygen: list(markdown = TRUE)
 URL: https://github.com/petzi53/qpost,
-    https://petzi53.github.io/qpost/
+    https://www.peter-baumgartner.net/qpost/
 BugReports: https://github.com/petzi53/qpost/issues
 Imports: 
     fs,
