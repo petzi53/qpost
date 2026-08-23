@@ -207,14 +207,18 @@ software/product names not in the base dictionary in `DESCRIPTION`:
 
 ✅ **`cran-comments.md`** updated with current results
 
-✅ **win-builder submitted** (2026-08-23) — both R-release and R-devel
-checks submitted via `devtools::check_win_release()` /
-`check_win_devel()`; results emailed to <petzi53@gmail.com> within
-~15-30 minutes of submission
+✅ **win-builder results** (2026-08-23) — Windows R-release, Windows
+R-devel, and macOS R-devel all completed. Windows R-release returned 1
+NOTE (new-submission notice plus a false-positive spelling flag on
+“COinS”/“ContextObjects” — both correctly spelled, domain-specific
+terms; no action needed). Windows R-devel and macOS R-devel succeeded
+cleanly.
 
-⬜ **R-hub check** (`rhub::check_for_cran()`) — not yet run, awaiting
-user decision ⬜ **Final submission** (`devtools::submit_cran()`) —
-after win-builder/R-hub results reviewed
+✅ **R-hub check** (`rhub::check_for_cran()`, 2026-08-23) — all
+platforms succeeded
+
+⬜ **Final submission** (`devtools::submit_cran()`) — ready; awaiting
+user go-ahead
 
 ## Next Steps
 
@@ -225,8 +229,8 @@ after win-builder/R-hub results reviewed
 3.  ✅ Step 3: Write tests
 4.  ✅ Step 4: Write vignettes
 5.  ✅ Step 5: Polish pkgdown site
-6.  🔄 Step 6: CRAN preparation — win-builder submitted, awaiting
-    results; R-hub and final submission still pending
+6.  🔄 Step 6: CRAN preparation — win-builder and R-hub checks all
+    clean; ready for final `devtools::submit_cran()` submission
 
 ------------------------------------------------------------------------
 
