@@ -11,7 +11,7 @@ a dialog window where you can enter the data for the YAML header of a
 new blog post.
 
 ![Dialog windows shows input field for title, author, date and
-subtitle](reference/figures/README-shiny-dialog-window.png)
+subtitle](reference/figures/qpost-dialog.png)
 
 Dialog window for creating a blog post
 

@@ -79,6 +79,11 @@ on the <code>rstudioapi</code> package, so <code><a href="../reference/qpost.htm
 <strong>RStudio</strong> and in <strong>Positron</strong> (which ships
 compatibility shims for the RStudio API), but not in plain VS Code or a
 terminal R session.</p>
+<div class="figure" style="text-align: center">
+<img src="figures/qpost-dialog.png" class="r-plt" alt="Dialog window showing input fields for title, author, date and subtitle" width="75%"><p class="caption">
+The qpost() dialog window
+</p>
+</div>
 <div class="section level3">
 <h3 id="when-to-use-qpost">When to use qpost()<a class="anchor" aria-label="anchor" href="#when-to-use-qpost"></a>
 </h3>
@@ -149,9 +154,10 @@ etc.</td>
 </tbody>
 </table>
 <div class="section level3">
-<h3 id="example-workflow">Example workflow<a class="anchor" aria-label="anchor" href="#example-workflow"></a>
+<h3 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h3>
-<p><strong>Using <code>quarto::new_blog_post()</code>:</strong></p>
+<p><strong>Using <code>quarto::new_blog_post()</code></strong>, you must
+remember the exact argument names and type everything out:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">quarto</span><span class="fu">::</span><span class="fu">new_blog_post</span><span class="op">(</span></span>
 <span>  title <span class="op">=</span> <span class="st">"My Amazing Discovery"</span>,</span>
@@ -159,16 +165,9 @@ etc.</td>
 <span>  author <span class="op">=</span> <span class="st">"Peter Baumgartner"</span>,</span>
 <span>  publish_date <span class="op">=</span> <span class="st">"2026-08-22"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>You must remember the exact argument names and type everything
-out.</p>
-<p><strong>Using <code><a href="../reference/qpost.html">qpost()</a></code>:</strong> 1. Run
-<code><a href="../reference/qpost.html">qpost()</a></code> (via the Addin or console, in RStudio or Positron)
-2. Fill in the dialog: title, author (pre-filled from options), date
-(today’s date suggested), categories 3. Optionally select a featured
-image from your filesystem 4. Click <strong>Create</strong> 5. The post
-is created and opened in the editor</p>
-<p>The dialog remembers your preferences and requires far fewer
-keystrokes.</p>
+<p><strong>Using <code><a href="../reference/qpost.html">qpost()</a></code></strong>, you fill in the same
+information through the dialog shown above — see <a href="#basic-usage">Basic Usage</a> for how to launch it and <a href="#the-qpost-dialog">The qpost() Dialog</a> for the full list of
+fields.</p>
 <hr>
 </div>
 </div>

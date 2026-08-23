@@ -17,6 +17,11 @@ on the `rstudioapi` package, so
 **RStudio** and in **Positron** (which ships compatibility shims for the
 RStudio API), but not in plain VS Code or a terminal R session.
 
+![Dialog window showing input fields for title, author, date and
+subtitle](figures/qpost-dialog.png)
+
+The qpost() dialog window
+
 ### When to use qpost()
 
 [`qpost()`](https://petzi53.github.io/qpost/reference/qpost.md) is
@@ -49,9 +54,10 @@ upon it:
 | **Persistence** | No configuration | Saves your defaults to `.Rprofile` for reuse |
 | **Customization** | Limited | Respects `qpost.*` options for author, draft status, etc. |
 
-### Example workflow
+### Example
 
-**Using `quarto::new_blog_post()`:**
+**Using `quarto::new_blog_post()`**, you must remember the exact
+argument names and type everything out:
 
 ``` r
 
@@ -63,17 +69,11 @@ quarto::new_blog_post(
 )
 ```
 
-You must remember the exact argument names and type everything out.
-
 **Using
-[`qpost()`](https://petzi53.github.io/qpost/reference/qpost.md):** 1.
-Run [`qpost()`](https://petzi53.github.io/qpost/reference/qpost.md) (via
-the Addin or console, in RStudio or Positron) 2. Fill in the dialog:
-title, author (pre-filled from options), date (today’s date suggested),
-categories 3. Optionally select a featured image from your filesystem 4.
-Click **Create** 5. The post is created and opened in the editor
-
-The dialog remembers your preferences and requires far fewer keystrokes.
+[`qpost()`](https://petzi53.github.io/qpost/reference/qpost.md)**, you
+fill in the same information through the dialog shown above — see [Basic
+Usage](#basic-usage) for how to launch it and [The qpost()
+Dialog](#the-qpost-dialog) for the full list of fields.
 
 ------------------------------------------------------------------------
 
