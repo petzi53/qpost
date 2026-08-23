@@ -8,12 +8,23 @@ and fixes a categories-formatting bug.
 ## Test environments
 
 * local macOS aarch64 (R 4.6.1), via `devtools::check()`: 0 errors | 0 warnings | 0 notes
-* win-builder (R-release and R-devel): submitted 2026-08-23, results pending via email
-* R-hub (`rhub::check_for_cran()`): not yet run
+* win-builder (Windows R-release, 2026-08-23): 0 errors | 0 warnings | 1 note
+* win-builder (Windows R-devel, 2026-08-23): succeeded
+* win-builder (macOS R-devel, 2026-08-23): succeeded
+* R-hub (`rhub::check_for_cran()`, 2026-08-23): all platforms succeeded
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 note (local: 0 notes)
+
+* checking CRAN incoming feasibility ... NOTE
+  New submission.
+  Possibly misspelled words in DESCRIPTION: COinS, ContextObjects.
+  Both are correctly spelled; COinS ("ContextObjects in Spans") is the
+  standard name of the embedded-metadata format the package's `add_coins()`
+  function implements (see https://en.wikipedia.org/wiki/COinS), and is
+  capitalized consistently throughout the package's documentation and
+  vignettes.
 
 ## Additional checks
 

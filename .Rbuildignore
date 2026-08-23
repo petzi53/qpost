@@ -14,3 +14,4 @@
 ^\.posit$
 ^\.posit/assistant$
 ^AGENTS\.md$
+^CRAN-SUBMISSION$
