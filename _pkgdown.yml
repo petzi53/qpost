@@ -15,7 +15,7 @@ reference:
       - add_coins
 
 articles:
-  - title: "Get started"
+  - title: "Articles"
     contents:
-      - qpost
+      - quarto-blog-posts
       - add-coins
