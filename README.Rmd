@@ -28,8 +28,8 @@ appropriate YAML front matter in RStudio.
 `qpost()` displays a dialog window where you can enter the data for
 the YAML header of a new blog post.
 
-```{r screenshot, fig.align='center', echo=FALSE, fig.cap='Dialog window for creating a blog post', fig.alt='Dialog windows shows input field for title, author, date and subtitle'}
-knitr::include_graphics("man/figures/README-shiny-dialog-window.png")
+```{r screenshot, fig.align='center', out.width='75%', echo=FALSE, fig.cap='Dialog window for creating a blog post', fig.alt='Dialog windows shows input field for title, author, date and subtitle'}
+knitr::include_graphics("man/figures/qpost-dialog.png")
 ```
 
 After clicking the "Done" button the function generates the core

@@ -26,6 +26,10 @@ Creating a new Quarto blog post usually involves several repetitive steps: creat
 
 The **qpost** package simplifies this workflow with an interactive dialog built with Shiny. Instead of manually typing YAML and directory names, you fill in a form, and `qpost()` handles the scaffolding automatically. The dialog and the file-opening step rely on the `rstudioapi` package, so `qpost()` runs in **RStudio** and in **Positron** (which ships compatibility shims for the RStudio API), but not in plain VS Code or a terminal R session.
 
+```{r dialog-screenshot, fig.align='center', out.width='75%', echo=FALSE, fig.cap='The qpost() dialog window', fig.alt='Dialog window showing input fields for title, author, date and subtitle'}
+knitr::include_graphics("figures/qpost-dialog.png")
+```
+
 ### When to use qpost()
 
 `qpost()` is designed for:
@@ -51,9 +55,9 @@ Quarto itself provides `quarto::new_blog_post()`, a function that creates a new 
 | **Persistence** | No configuration | Saves your defaults to `.Rprofile` for reuse |
 | **Customization** | Limited | Respects `qpost.*` options for author, draft status, etc. |
 
-### Example workflow
+### Example
 
-**Using `quarto::new_blog_post()`:**
+**Using `quarto::new_blog_post()`**, you must remember the exact argument names and type everything out:
 ```r
 quarto::new_blog_post(
   title = "My Amazing Discovery",
@@ -62,16 +66,8 @@ quarto::new_blog_post(
   publish_date = "2026-08-22"
 )
 ```
-You must remember the exact argument names and type everything out.
 
-**Using `qpost()`:**
-1. Run `qpost()` (via the Addin or console, in RStudio or Positron)
-2. Fill in the dialog: title, author (pre-filled from options), date (today's date suggested), categories
-3. Optionally select a featured image from your filesystem
-4. Click **Create**
-5. The post is created and opened in the editor
-
-The dialog remembers your preferences and requires far fewer keystrokes.
+**Using `qpost()`**, you fill in the same information through the dialog shown above — see [Basic Usage](#basic-usage) for how to launch it and [The qpost() Dialog](#the-qpost-dialog) for the full list of fields.
 
 ---
 
