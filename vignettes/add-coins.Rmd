@@ -54,28 +54,7 @@ This is especially valuable for academic writers who rely on reference managers 
 
 ---
 
-## The Metadata in COinS
 
-A COinS entry is built from key-value pairs that describe a published work. The main fields for a blog post are:
-
-| Field | Example | Purpose |
-|-------|---------|---------|
-| `rft.title` | "My Amazing Discovery" | Article title |
-| `rft.au` | "Peter Baumgartner" | Author name |
-| `rft.date` | "2026-08-22" | Publication date |
-| `rft.genre` | "blogPost" | Content type (in this case, a blog post) |
-| `rft_val_fmt` | "info:ofi/fmt:kev:mtx:journal" | Standard identifier for the metadata format |
-| `rft.description` | "A brief summary..." | Post description or abstract |
-| `rft.keywords` | "research, data science" | Categories or tags |
-| `ctx_ver` | "Z39.88-2004" | COinS specification version |
-
-Additional optional fields can include:
-- `rft.pub` — Publication/blog name
-- `rft.spage`, `rft.epage` — Page numbers (not applicable to blog posts)
-- `rft.issn` — Journal ISSN (not applicable to blog posts)
-- `rft.language` — Language code (e.g., "en-US")
-
----
 
 ## The Standard Behind COinS
 
@@ -121,58 +100,39 @@ Without COinS, Zotero might not recognize the page as a citable item, and you'd 
 
 ---
 
-## Adding COinS to Your Blog Posts
+## How to Use add_coins()
 
-The `add_coins()` function automates COinS generation. Here's how to use it:
+The `add_coins()` function automates the entire process. 
 
 ### Prerequisites
 
 - A completed Quarto blog post in `posts/your-post/index.qmd`
 - A `_quarto.yml` file in your blog's root directory with at least `site-url:` specified
-- Optional: configuration in your project's `.Rprofile`
 
 ### Basic Usage
 
 ```r
 library(qpost)
 
-# Add COinS metadata to the currently open post in RStudio
+# Add COinS to the currently open post in RStudio
 add_coins()
 
 # Or specify a file path explicitly
 add_coins(file_path = "posts/my-post/index.qmd")
 ```
 
-### With configuration
+### What Happens
 
-Set up your blog's metadata in the project `.Rprofile`:
+When you call `add_coins()`, it:
 
-```r
-# Project-level .Rprofile
-options(
-  qpost.lang = "en",          # Language code (auto-detected from _quarto.yml if present)
-  qpost.license = "CC-BY-4.0" # Creative Commons license for your blog posts
-)
-```
+1. **Reads your post's YAML** — extracts title, author, date, categories, description
+2. **Queries `_quarto.yml`** — reads site URL and language settings
+3. **Applies auto-resolution** — fills gaps from `_quarto.yml` and `.Rprofile` options
+4. **Generates COinS metadata** — creates key-value pairs (title, author, date, language, license, etc.)
+5. **Appends a hidden R code chunk** to render the COinS `<span>` at the end of your post
+6. **Opens the edited file** — so you can review and commit
 
-Then call `add_coins()` as above.
-
----
-
-## What add_coins() Does
-
-When you call `add_coins(file_path)`:
-
-1. **Reads your post's YAML front matter** — extracts title, author, date, categories, description, etc.
-2. **Queries `_quarto.yml`** — reads the blog's site URL and language settings
-3. **Applies auto-resolution** — fills in missing fields from defaults:
-   - `language` — from post YAML → from `_quarto.yml` → from `getOption("qpost.lang")` → omitted
-   - `license` — from post YAML → from `getOption("qpost.license")` → omitted
-4. **Generates the COinS metadata** — creates the properly formatted key-value string
-5. **Creates an R code chunk** — appends a chunk to your post that displays the metadata
-6. **Opens the edited post** — so you can review and commit the changes
-
-### Generated Output
+### What Gets Generated
 
 At the bottom of your `index.qmd`, `add_coins()` appends:
 
@@ -189,98 +149,33 @@ This code:
 - Outputs the COinS `<span>` as raw HTML
 - Is placed **at the end** of your post, so Zotero sees the complete content first
 
----
 
-## The Metadata in Detail
-
-Here's what each key means in the generated COinS:
-
-```
-ctx_ver=Z39.88-2004
-```
-Specifies the COinS/OpenURL version.
-
-```
-rft_val_fmt=info:ofi/fmt:kev:mtx:journal
-```
-Declares the metadata format as "key-encoded-value" (`kev`) for a journal-like resource. We use this for blog posts because they're closest to journal articles in structure.
-
-```
-rft.genre=blogPost
-```
-Identifies the resource type as a blog post (not a book, journal article, or conference paper).
-
-```
-rft.atitle=My%20Amazing%20Discovery
-```
-The article title (URL-encoded, so spaces become `%20`).
-
-```
-rft.au=Peter%20Baumgartner
-```
-The author name.
-
-```
-rft.date=2026-08-22
-```
-Publication date in ISO format (`YYYY-MM-DD`).
-
-```
-rft.description=A%20brief%20summary...
-```
-Post description or abstract (optional).
-
-```
-rft.language=en
-```
-Language code (optional). Defaults to your blog's language from `_quarto.yml`.
-
-```
-rft.keywords=research%2Cdata%20science
-```
-Categories/tags from your post (comma-separated, URL-encoded).
-
-```
-rft.license=CC-BY-4.0
-```
-License identifier (optional). Set in `.Rprofile` to apply the same license to all posts.
-
----
 
 ## Configuration
 
-### Auto-resolution Hierarchy
-
-`add_coins()` builds metadata using this priority order:
-
-| Field | Source priority |
-|-------|-----------------|
-| **title** | Post YAML `title:` (required) |
-| **date** | Post YAML `date:` (required) |
-| **author** | Post YAML `author:` |
-| **description** | Post YAML `description:` |
-| **categories/keywords** | Post YAML `categories:` |
-| **language** | (1) Post YAML `lang:` → (2) `_quarto.yml` `lang:` → (3) `getOption("qpost.lang")` → omitted |
-| **license** | (1) Post YAML `license:` → (2) `getOption("qpost.license")` → omitted |
-| **site/blog name** | `_quarto.yml` `title:` |
-| **site URL** | `_quarto.yml` `site-url:` |
-
-This means:
-- If your `_quarto.yml` already specifies a language, you don't need to configure `qpost.lang`
-- You only need to set `qpost.license` once in your `.Rprofile` to apply it to all posts
-- Post-level YAML always overrides defaults
-
-### Example .Rprofile
+By default, `add_coins()` reads everything it needs from your post YAML and `_quarto.yml`. You only need to configure `.Rprofile` for optional fallback values:
 
 ```r
 # Project-level .Rprofile (in your blog's root directory)
-
-# These settings apply to add_coins() for this project
 options(
-  qpost.lang = "en",           # Fallback language for posts without lang: in YAML
-  qpost.license = "CC-BY-4.0"  # License for blog post content
+  qpost.lang = "en",           # Fallback language if not in post or _quarto.yml
+  qpost.license = "CC-BY-4.0"  # License code for all posts
 )
 ```
+
+### Auto-resolution Priority
+
+For each field, `add_coins()` looks in this order:
+
+1. **Post YAML** (e.g., `lang:`, `license:` in your post's front matter)
+2. **`_quarto.yml`** (e.g., `lang:` in your blog config)
+3. **`.Rprofile` options** (e.g., `getOption("qpost.lang")`, `getOption("qpost.license")`)
+4. **Omitted** if not found anywhere
+
+This design means:
+- Most of the time, you don't need `.Rprofile` setup — your post YAML and `_quarto.yml` suffice
+- Set `qpost.license` once in `.Rprofile` to apply it to all posts automatically
+- Post-level values always override defaults
 
 ---
 
