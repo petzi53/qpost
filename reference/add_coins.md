@@ -86,6 +86,38 @@ created.
 ## Examples
 
 ``` r
+# \donttest{
+# Create a minimal Quarto project in a temporary directory
+tmp <- tempdir()
+writeLines(
+  c("project:", "  type: website", "website:", "  title: My Blog",
+    "  site-url: https://example.com"),
+  file.path(tmp, "_quarto.yml")
+)
+post_file <- file.path(tmp, "index.qmd")
+writeLines(
+  c("---", "title: Test Post", "date: 2026-01-01", "---", "", "Content."),
+  post_file
+)
+add_coins(file_path = post_file, backup = FALSE)
+#> Processing: /tmp/RtmpBUkOLc/index.qmd
+#> COinS chunk appended to:  /tmp/RtmpBUkOLc/index.qmd
+#> 
+#> ── Generated COinS chunk ───────────────────────────────────────────────────
+#> ```{r}
+#> #| label: coins-code
+#> #| results: asis
+#> #| echo: false
+#> 
+#> coins_metadata <- "title='ctx_ver=Z39.88-2004&rft_val_fmt=info%3aofi%2ffmt%3akev%3amtx%3adc&rft.type=blogPost&rft.title=Test%20Post&rft.date=2026&rft.source=My%20Blog&rft_id=https://example.com/index'"
+#> 
+#> coins_html <- paste0('<span class="Z3988" ', coins_metadata, '></span>')
+#> 
+#> cat(coins_html)
+#> ```
+#> ────────────────────────────────────────────────────────────────────────
+# }
+
 if (FALSE) { # \dontrun{
 # From an RStudio or Positron editor with a .qmd file open:
 add_coins()
