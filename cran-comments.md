@@ -1,4 +1,21 @@
-## Submission
+## Resubmission
+
+This is a resubmission. Two issues raised by the CRAN team have been fixed:
+
+1. **`cat()` in package function** (`R/coins_generation.R`):  
+   The `cat()` call in `generate_and_append_coins()` that printed the generated
+   COinS chunk to the console has been replaced by `message()`, which can be
+   suppressed by the user with `suppressMessages()`.
+
+2. **Writing to home filespace in examples** (`R/coins_generation.R`):  
+   A `\donttest{}` example has been added to `add_coins()` that creates all
+   required files inside `tempdir()` and passes the path explicitly via
+   `file_path =`. The existing `\dontrun{}` block for IDE-based workflows is
+   retained.
+
+---
+
+## Original submission note
 
 This is a new package. It was previously developed on GitHub under the name
 `quartopost`, but was never submitted to CRAN under that name. Version 1.0.0

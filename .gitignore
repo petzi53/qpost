@@ -5,7 +5,7 @@
 .httr-oauth
 .DS_Store
 README.html
-docs
+docs/
 my_archive
 .posit/assistant/
 inst/doc
