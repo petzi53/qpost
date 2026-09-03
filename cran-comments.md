@@ -24,9 +24,9 @@ and fixes a categories-formatting bug.
 
 ## Test environments
 
-* local macOS aarch64 (R 4.6.1), via `devtools::check()`: 0 errors | 0 warnings | 0 notes
+* local macOS aarch64 (R 4.6.1), via `devtools::check()`, 2026-09-03: 0 errors | 0 warnings | 0 notes
 * win-builder (Windows R-release, 2026-08-23): 0 errors | 0 warnings | 1 note
-* win-builder (Windows R-devel, 2026-08-23): succeeded
+* win-builder (Windows R-devel, 2026-09-03): 0 errors | 0 warnings | 1 note (see below)
 * win-builder (macOS R-devel, 2026-08-23): succeeded
 * R-hub (`rhub::check_for_cran()`, 2026-08-23): all platforms succeeded
 
