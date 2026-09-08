@@ -88,7 +88,8 @@ created.
 ``` r
 # \donttest{
 # Create a minimal Quarto project in a temporary directory
-tmp <- tempdir()
+tmp <- tempfile()
+dir.create(tmp)
 writeLines(
   c("project:", "  type: website", "website:", "  title: My Blog",
     "  site-url: https://example.com"),
@@ -100,8 +101,8 @@ writeLines(
   post_file
 )
 add_coins(file_path = post_file, backup = FALSE)
-#> Processing: /tmp/RtmpQMvB35/index.qmd
-#> COinS chunk appended to:  /tmp/RtmpQMvB35/index.qmd
+#> Processing: /tmp/RtmpJIBMt5/file194d64d04f9a/index.qmd
+#> COinS chunk appended to:  /tmp/RtmpJIBMt5/file194d64d04f9a/index.qmd
 #> 
 #> ── Generated COinS chunk ───────────────────────────────────────────────────
 #> ```{r}
