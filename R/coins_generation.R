@@ -430,7 +430,8 @@ generate_and_append_coins <- function(file_path, backup = TRUE) {
 #' @examples
 #' \donttest{
 #' # Create a minimal Quarto project in a temporary directory
-#' tmp <- tempdir()
+#' tmp <- tempfile()
+#' dir.create(tmp)
 #' writeLines(
 #'   c("project:", "  type: website", "website:", "  title: My Blog",
 #'     "  site-url: https://example.com"),
@@ -461,6 +462,21 @@ add_coins <- function(file_path = NULL, backup = TRUE) {
         file_path <- resolve_target_file()
     }
 
+    # Auto-resolve directory paths: blog posts live in slug/index.qmd
+    if (fs::is_dir(file_path)) {
+        candidate <- fs::path(file_path, "index.qmd")
+        if (fs::file_exists(candidate)) {
+            message("Resolving directory to: ", candidate)
+            file_path <- candidate
+        } else {
+            stop(
+                "'", file_path, "' is a directory and does not contain index.qmd. ",
+                "Pass the full path to the .qmd file directly.",
+                call. = FALSE
+            )
+        }
+    }
+
     if (!fs::file_exists(file_path)) {
         stop("File not found: ", file_path, call. = FALSE)
     }
@@ -473,7 +489,7 @@ resolve_target_file <- function() {
     # rstudioapi::isAvailable() returns TRUE in both RStudio and Positron
     # (Positron ships an rstudioapi compatibility shim).
     if (rstudioapi::isAvailable()) {
-        target_file <- rstudioapi::getActiveDocumentContext()$path
+        target_file <- rstudioapi::getSourceEditorContext()$path
 
         if (nzchar(target_file)) {
             return(target_file)

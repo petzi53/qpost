@@ -79,7 +79,8 @@ to be supplied directly.
 \examples{
 \donttest{
 # Create a minimal Quarto project in a temporary directory
-tmp <- tempdir()
+tmp <- tempfile()
+dir.create(tmp)
 writeLines(
   c("project:", "  type: website", "website:", "  title: My Blog",
     "  site-url: https://example.com"),
