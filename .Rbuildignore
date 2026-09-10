@@ -15,3 +15,5 @@
 ^\.posit/assistant$
 ^AGENTS\.md$
 ^CRAN-SUBMISSION$
+^README\.html$
+^inst/pkgdown$
