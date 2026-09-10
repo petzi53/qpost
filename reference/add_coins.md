@@ -101,8 +101,8 @@ writeLines(
   post_file
 )
 add_coins(file_path = post_file, backup = FALSE)
-#> Processing: /tmp/RtmpJmH2Py/file19333b5483bc/index.qmd
-#> COinS chunk appended to:  /tmp/RtmpJmH2Py/file19333b5483bc/index.qmd
+#> Processing: /tmp/RtmpTuOz2T/file1958174a05cc/index.qmd
+#> COinS chunk appended to:  /tmp/RtmpTuOz2T/file1958174a05cc/index.qmd
 #> 
 #> ── Generated COinS chunk ───────────────────────────────────────────────────
 #> ```{r}
