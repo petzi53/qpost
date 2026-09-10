@@ -497,7 +497,7 @@ resolve_target_file <- function() {
 
         stop(
             "No active file detected. Open the target .qmd in the editor first, ",
-            "or call add_coins(file_path = ...) directly.",
+            "or supply the file_path argument directly.",
             call. = FALSE
         )
     }
@@ -508,8 +508,8 @@ resolve_target_file <- function() {
     }
 
     stop(
-        "add_coins() could not detect a target file. ",
-        "Call add_coins(file_path = \"path/to/post.qmd\") directly.",
+        "Could not detect a target file. ",
+        "Supply the file_path argument directly.",
         call. = FALSE
     )
 }

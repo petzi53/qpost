@@ -6,8 +6,9 @@ jsFocus <- '
       });
     '
 
-# display dialog window to fill data for creating Quarto post
-get_args <- function() {
+# display dialog window to fill data for creating/editing Quarto post
+get_args <- function(defaults = NULL) {
+  edit_mode <- !is.null(defaults)
 
   # start mini page
   ui <- miniUI::miniPage(
@@ -26,18 +27,19 @@ get_args <- function() {
             shiny::textInput(
               inputId = "title",
               label = "Title (required)",
+              value = if (edit_mode) defaults$title else "",
               placeholder = "Name of your blog post"
             ),
             shiny::textInput(
               inputId = "author",
               label = "Author",
-              value = getOption("qpost.author"),
+              value = if (edit_mode) defaults$author else getOption("qpost.author"),
               placeholder = "Author of this post"
             ),
             shiny::dateInput(
               inputId = "date",
               label = "Date",
-              value = lubridate::today(),
+              value = if (edit_mode) defaults$date else lubridate::today(),
             ),
 
       ),
@@ -47,6 +49,7 @@ get_args <- function() {
         shiny::textInput(
             inputId = "subtitle",
             label = "Subtitle",
+            value = if (edit_mode) defaults$subtitle else "",
             placeholder = "subtitle (optional)",
             width = "100%",
         ),
@@ -66,6 +69,7 @@ get_args <- function() {
                         "Choose one of the categories already used" = "",
                         stringr::str_sort(get_cat())
                       ),
+                      selected = if (edit_mode) defaults$categories else NULL,
                   ),
                   shiny::textInput(
                       inputId = "newcat",
@@ -88,17 +92,21 @@ get_args <- function() {
 
             # start panel for image upload
             shiny::fillRow(
-            shiny::fileInput("newimg", "Image",
-              placeholder =
-                "Select external image", accept = "image/*"
+            shiny::fileInput("newimg",
+              label = if (edit_mode && nzchar(defaults$current_image))
+                paste0("New Image (current: ", defaults$current_image, ")")
+              else "Image",
+              placeholder = "Select external image", accept = "image/*"
             ),
             shiny::column(width = 6, offset = 2),
             height = "70px"
           ),
           shiny::fillRow(
             shiny::textInput(
-              "alt", "Alternative text", "", "100%",
-              "Replacement text when image is not available"
+              "alt", "Alternative text",
+              value = if (edit_mode) defaults$alt else "",
+              width = "100%",
+              placeholder = "Replacement text when image is not available"
             ),
             height = "70px"
           ),
@@ -110,6 +118,7 @@ get_args <- function() {
             shiny::textAreaInput(
               inputId = "description",
               label = "Description",
+              value = if (edit_mode) defaults$description else "",
               placeholder =
                 "Write (optional) a short description, summary or introductory paragraph. Markdown is allowed.",
               width = "100%",
@@ -120,7 +129,10 @@ get_args <- function() {
 ##############   end of description ###########################
     ), # end of mini content panel
 
-    miniUI::gadgetTitleBar("Enter the YAML fields for your post"),
+    miniUI::gadgetTitleBar(
+      if (edit_mode) "Edit the YAML fields of your post"
+      else "Enter the YAML fields for your post"
+    ),
 
   ) # end of mini page
 
@@ -133,7 +145,8 @@ get_args <- function() {
         if (title_empty <- (is.null(input$title) || input$title == "")) {
             shinyFeedback::feedbackWarning("title", show = TRUE, "Enter a title or click the 'Cancel' button")
             shiny::req(!title_empty)
-        } else {
+        } else if (!edit_mode) {
+            # Create mode: check that the target file does not already exist
             slug <- paste0(
                 "posts/", input$date, "-",
                 title_kebab(input$title)
@@ -145,6 +158,10 @@ get_args <- function() {
             }
             shinyFeedback::feedbackSuccess("title", show = TRUE, "Valid file name")
             return(list(title = input$title, slug = slug, filename = new_post_file))
+        } else {
+            # Edit mode: non-empty title is sufficient
+            shinyFeedback::feedbackSuccess("title", show = TRUE, "")
+            return(list(title = input$title, slug = NA_character_, filename = NA_character_))
         }
     })
 

@@ -3,3 +3,8 @@ Description: Dialog to fill in YAML fields for a new Quarto post
 Binding: qpost
 Interactive: true
 
+Name: Edit Post YAML
+Description: Dialog to edit the YAML front matter of the current blog post
+Binding: edit_post
+Interactive: true
+

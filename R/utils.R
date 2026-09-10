@@ -1,3 +1,11 @@
+escape_yaml_dq <- function(x) {
+  # In YAML double-quoted scalars, backslashes and double quotes must be escaped.
+  x |>
+    stringr::str_replace_all(stringr::fixed("\\"), "\\\\") |>
+    stringr::str_replace_all(stringr::fixed('"'), '\\"')
+}
+
+
 title_kebab <- function(title) {
   # https://stackoverflow.com/a/38171652/7322615
   stringi::stri_trans_general((title), "latin-ascii") |>
@@ -43,21 +51,23 @@ prepare_categories <- function(cat, new) {
 
 
 prepare_yaml <- function(args, desc,
-                         img_name, cats, draft, fields) {
+                         img_name, cats, draft, fields,
+                         date_modified = NULL) {
+  dm <- if (!is.null(date_modified)) date_modified else args$date
   # if show_empty_fields == TRUE
   if (fields) {
       paste(c(
         "---",
-        glue::glue('title: "{args$file_data$title}"'),
-        glue::glue('subtitle: "{args$subtitle}"'),
+        glue::glue('title: "{escape_yaml_dq(args$file_data$title)}"'),
+        glue::glue('subtitle: "{escape_yaml_dq(args$subtitle)}"'),
         glue::glue("{desc}"),
-        glue::glue('author: "{args$author}"'),
+        glue::glue('author: "{escape_yaml_dq(args$author)}"'),
         glue::glue('date: "{args$date}"'),
         glue::glue('image: "{img_name}"'),
-        glue::glue('image-alt: "{args$alt}"'),
+        glue::glue('image-alt: "{escape_yaml_dq(args$alt)}"'),
         glue::glue("categories: [{cats}]"),
         # date-modified starts always with date choice
-        glue::glue('date-modified: "{args$date}"'),
+        glue::glue('date-modified: "{dm}"'),
         glue::glue("draft: {draft}"),
         "---\n"
       ), collapse = "\n")
@@ -65,21 +75,21 @@ prepare_yaml <- function(args, desc,
   } else {
       paste(c(
           "---",
-          glue::glue('title: "{args$file_data$title}"'),
+          glue::glue('title: "{escape_yaml_dq(args$file_data$title)}"'),
           if (args$subtitle != "") {
-            glue::glue('subtitle: "{args$subtitle}"')},
+            glue::glue('subtitle: "{escape_yaml_dq(args$subtitle)}"')},
           if (args$desc != "") {
             glue::glue("{desc}")},
-          glue::glue('author: "{args$author}"'),
+          glue::glue('author: "{escape_yaml_dq(args$author)}"'),
           glue::glue('date: "{args$date}"'),
           if (img_name != "") {
             glue::glue('image: "{img_name}"')
-            glue::glue('image-alt: "{args$alt}"')},
+            glue::glue('image-alt: "{escape_yaml_dq(args$alt)}"')},
           if (cats != "") {
             glue::glue("categories: [{cats}]")},
           # date-modified starts always with date choice
           if (args$date) {
-            glue::glue('date-modified: "{args$date}"')},
+            glue::glue('date-modified: "{dm}"')},
           glue::glue("draft: {draft}"),
           "---\n"
       ), collapse = "\n")

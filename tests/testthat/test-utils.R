@@ -1,5 +1,23 @@
 # Tests for utility functions in R/utils.R
 
+# Test escape_yaml_dq ─────────────────────────────────────────────────────
+test_that("escape_yaml_dq escapes double quotes", {
+  expect_equal(qpost:::escape_yaml_dq('My "Best" Post'), 'My \\"Best\\" Post')
+  expect_equal(qpost:::escape_yaml_dq('"Quoted"'), '\\"Quoted\\"')
+})
+
+test_that("escape_yaml_dq escapes backslashes before double quotes", {
+  expect_equal(qpost:::escape_yaml_dq("path\\to\\file"), "path\\\\to\\\\file")
+  expect_equal(qpost:::escape_yaml_dq('back\\slash and "quote"'), 'back\\\\slash and \\"quote\\"')
+})
+
+test_that("escape_yaml_dq leaves plain strings unchanged", {
+  expect_equal(qpost:::escape_yaml_dq("Hello World"), "Hello World")
+  expect_equal(qpost:::escape_yaml_dq(""), "")
+})
+
+
+# Test title_kebab ────────────────────────────────────────────────────────
 test_that("title_kebab converts title to kebab case", {
   expect_equal(qpost:::title_kebab("My First Post"), "my-first-post")
   expect_equal(qpost:::title_kebab("Hello World!"), "hello-world")
