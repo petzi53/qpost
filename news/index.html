@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">qpost</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,6 +33,21 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.1.0" id="qpost-110">qpost 1.1.0<a class="anchor" aria-label="anchor" href="#qpost-110"></a></h2>
+<ul><li>New exported function <code><a href="../reference/edit_post.html">edit_post()</a></code> for editing existing post YAML metadata via dialog
+<ul><li>Pre-populates dialog with current YAML values</li>
+<li>Auto-updates <code>date-modified</code> to today on every save</li>
+<li>Preserves post body; only replaces YAML front matter</li>
+<li>Optional <code>.bak</code> backup before modification</li>
+<li>Available as RStudio/Positron addin</li>
+</ul></li>
+<li>Fixed critical bug: YAML rendering now correctly escapes quotation marks in user input
+<ul><li>User intent is preserved (e.g., titles with quotes render exactly as typed)</li>
+<li>New internal helper <code>escape_yaml_dq()</code> handles escaping</li>
+<li>All text fields (title, subtitle, author, image-alt) now safe for special characters</li>
+</ul></li>
+</ul></div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.0" id="qpost-100">qpost 1.0.0<a class="anchor" aria-label="anchor" href="#qpost-100"></a></h2>
 <ul><li>Package renamed from <code>quartopost</code> to <code>qpost</code>
 </li>
@@ -44,7 +59,8 @@
 <li>All option names updated from <code>quartopost.*</code> prefix to <code>qpost.*</code>
 </li>
 </ul></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
