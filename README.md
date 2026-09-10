@@ -1,5 +1,5 @@
 
-# qpost
+# qpost <a href="https://github.com/petzi53/qpost"><img src="man/figures/qpost-hex.png" align="right" height="139" alt="qpost website" /></a>
 
 <!-- badges: start -->
 

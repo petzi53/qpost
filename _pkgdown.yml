@@ -1,7 +1,17 @@
 url: https://www.peter-baumgartner.net/qpost/
 
+home:
+  title: qpost | Create Quarto Blog Posts
+  description: An interactive RStudio dialog for scaffolding Quarto blog posts with properly formatted YAML front matter
+  links:
+    - text: Learn more
+      href: articles/qpost.html
+    - text: GitHub
+      href: https://github.com/petzi53/qpost
+
 template:
   bootstrap: 5
+  logo: man/figures/qpost-hex.png
 
 navbar:
   right:
