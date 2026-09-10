@@ -1,5 +1,18 @@
 # Changelog
 
+## qpost 1.2.1
+
+- Fixed Windows line-ending bug in
+  [`edit_post()`](https://www.peter-baumgartner.net/qpost/reference/edit_post.md):
+  [`readr::read_file()`](https://readr.tidyverse.org/reference/read_file.html)
+  reads in binary mode so files with CRLF line endings caused the
+  YAML-replacement regex to silently fail on Windows. Line endings are
+  now normalised (CRLF → LF) immediately after reading, before the regex
+  is applied.
+- Same CRLF normalisation applied to
+  [`add_coins()`](https://www.peter-baumgartner.net/qpost/reference/add_coins.md)
+  for consistency.
+
 ## qpost 1.2.0
 
 - [`edit_post()`](https://www.peter-baumgartner.net/qpost/reference/edit_post.md)

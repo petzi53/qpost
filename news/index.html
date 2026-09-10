@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">qpost</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +32,11 @@
       <small>Source: <a href="https://github.com/petzi53/qpost/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.2.1" id="qpost-121">qpost 1.2.1<a class="anchor" aria-label="anchor" href="#qpost-121"></a></h2>
+<ul><li>Fixed Windows line-ending bug in <code><a href="../reference/edit_post.html">edit_post()</a></code>: <code><a href="https://readr.tidyverse.org/reference/read_file.html" class="external-link">readr::read_file()</a></code> reads in binary mode so files with CRLF line endings caused the YAML-replacement regex to silently fail on Windows. Line endings are now normalised (CRLF → LF) immediately after reading, before the regex is applied.</li>
+<li>Same CRLF normalisation applied to <code><a href="../reference/add_coins.html">add_coins()</a></code> for consistency.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.2.0" id="qpost-120">qpost 1.2.0<a class="anchor" aria-label="anchor" href="#qpost-120"></a></h2>
 <ul><li>
