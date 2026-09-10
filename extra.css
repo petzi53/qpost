@@ -1,5 +1,6 @@
-/* Home page logo sizing */
-img.logo {
-  height: 50px;
-  width: auto;
+/* Home page logo sizing — override pkgdown default width: 120px */
+img.logo,
+.template-home img.logo {
+  height: 50px !important;
+  width: auto !important;
 }
