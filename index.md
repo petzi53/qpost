@@ -1,4 +1,4 @@
-# qpost [![qpost website](reference/figures/qpost-hex.png)](https://github.com/petzi53/qpost)
+# qpost
 
 ## Goal
 
