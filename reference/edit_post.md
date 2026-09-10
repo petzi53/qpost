@@ -35,8 +35,36 @@ Nothing. The side effect is an updated YAML front matter in the target
 it relies on rstudioapi to display the dialog. It cannot be used in a
 plain R console or non-interactive script.
 
-The `date-modified` field is automatically set to today's date on every
-save; all other fields reflect exactly what was entered in the dialog.
+**Changing the title**
+
+When you modify the title in the dialog and click Done, you are asked
+whether to create a new post directory for the new title:
+
+- **Yes** — copies all files from the old post directory into a new
+  directory named after the new title's kebab-case slug. The original
+  directory is renamed to `_old-slug.bak/` and its `index.qmd` has
+  `draft: true` set. The new file is opened in the editor automatically.
+
+- **No** — updates only the YAML `title:` field; the directory name
+  stays unchanged.
+
+**Important:** if the post has already been published, creating a new
+directory changes its URL. This will break existing links, bookmarks,
+and search-engine entries pointing to the old address.
+
+The backup directory is protected from accidental publication by two
+independent mechanisms: the leading `_` in its name causes Quarto to
+skip it during rendering (consistent with Quarto's own `_freeze/` and
+`_site/` convention), and `draft: true` in the YAML acts as an
+additional human-readable signal. To recover the old title, rename the
+directory by removing the leading `_` and the `.bak` suffix.
+
+The dialog shows a reminder in the title field as soon as it detects a
+change, so you are always aware before clicking Done.
+
+**`date-modified`**
+
+This field is automatically set to today's date on every save.
 
 ## Examples
 

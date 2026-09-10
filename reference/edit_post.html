@@ -11,7 +11,7 @@ front matter, leaving the post body untouched."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">qpost</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,8 +73,27 @@ target <code>.qmd</code> file.</p>
     <p><code>edit_post()</code> requires a pane-capable IDE (RStudio or Positron) because it
 relies on <span class="pkg">rstudioapi</span> to display the dialog. It cannot be used in a
 plain R console or non-interactive script.</p>
-<p>The <code>date-modified</code> field is automatically set to today's date on every
-save; all other fields reflect exactly what was entered in the dialog.</p>
+<p><strong>Changing the title</strong></p>
+<p>When you modify the title in the dialog and click Done, you are asked
+whether to create a new post directory for the new title:</p><ul><li><p><strong>Yes</strong> — copies all files from the old post directory into a new
+directory named after the new title's kebab-case slug. The original
+directory is renamed to <code>_old-slug.bak/</code> and its <code>index.qmd</code> has
+<code>draft: true</code> set. The new file is opened in the editor automatically.</p></li>
+<li><p><strong>No</strong> — updates only the YAML <code>title:</code> field; the directory name
+stays unchanged.</p></li>
+</ul><p><strong>Important:</strong> if the post has already been published, creating a new
+directory changes its URL. This will break existing links, bookmarks,
+and search-engine entries pointing to the old address.</p>
+<p>The backup directory is protected from accidental publication by two
+independent mechanisms: the leading <code>_</code> in its name causes Quarto to
+skip it during rendering (consistent with Quarto's own <code>_freeze/</code> and
+<code>_site/</code> convention), and <code>draft: true</code> in the YAML acts as an
+additional human-readable signal. To recover the old title, rename the
+directory by removing the leading <code>_</code> and the <code>.bak</code> suffix.</p>
+<p>The dialog shows a reminder in the title field as soon as it detects
+a change, so you are always aware before clicking Done.</p>
+<p><strong><code>date-modified</code></strong></p>
+<p>This field is automatically set to today's date on every save.</p>
     </div>
 
     <div class="section level2">

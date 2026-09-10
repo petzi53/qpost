@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">qpost</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +32,19 @@
       <small>Source: <a href="https://github.com/petzi53/qpost/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.2.0" id="qpost-120">qpost 1.2.0<a class="anchor" aria-label="anchor" href="#qpost-120"></a></h2>
+<ul><li>
+<code><a href="../reference/edit_post.html">edit_post()</a></code> now handles title changes interactively:
+<ul><li>When the title is modified in the dialog, the title field shows an amber warning reminding the user that a directory decision will follow</li>
+<li>After clicking Done, the user is asked whether to create a new post directory for the new title</li>
+<li>
+<strong>Yes</strong>: all files are copied to a new directory named after the new title’s kebab-case slug; the old directory is renamed to <code>_old-slug.bak/</code> (hidden from Quarto rendering by the leading <code>_</code>) and its <code>index.qmd</code> has <code>draft: true</code> set as an additional safety signal; the new file is opened automatically in the editor</li>
+<li>
+<strong>No</strong>: only the YAML <code>title:</code> field is updated; the directory name stays unchanged</li>
+<li>If the target new directory already exists, the operation falls back to a YAML-only update with a warning</li>
+</ul></li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.1.0" id="qpost-110">qpost 1.1.0<a class="anchor" aria-label="anchor" href="#qpost-110"></a></h2>
 <ul><li>New exported function <code><a href="../reference/edit_post.html">edit_post()</a></code> for editing existing post YAML metadata via dialog

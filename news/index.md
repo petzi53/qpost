@@ -1,5 +1,24 @@
 # Changelog
 
+## qpost 1.2.0
+
+- [`edit_post()`](https://www.peter-baumgartner.net/qpost/reference/edit_post.md)
+  now handles title changes interactively:
+  - When the title is modified in the dialog, the title field shows an
+    amber warning reminding the user that a directory decision will
+    follow
+  - After clicking Done, the user is asked whether to create a new post
+    directory for the new title
+  - **Yes**: all files are copied to a new directory named after the new
+    title’s kebab-case slug; the old directory is renamed to
+    `_old-slug.bak/` (hidden from Quarto rendering by the leading `_`)
+    and its `index.qmd` has `draft: true` set as an additional safety
+    signal; the new file is opened automatically in the editor
+  - **No**: only the YAML `title:` field is updated; the directory name
+    stays unchanged
+  - If the target new directory already exists, the operation falls back
+    to a YAML-only update with a warning
+
 ## qpost 1.1.0
 
 - New exported function
