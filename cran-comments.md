@@ -1,3 +1,20 @@
+## Third resubmission (2026-09-10)
+
+Version bump to 1.2.0. One new feature added to `edit_post()`:
+
+**Title-change handling in `edit_post()`** (`R/edit_post.R`, `R/get_args.R`):  
+When the user changes the title in the dialog, the title field now shows an
+amber warning before the user clicks Done. After clicking Done, the user is
+asked whether to also create a new post directory for the new title. Choosing
+Yes copies all files to a new directory named after the new slug, renames the
+old directory to `_old-slug.bak/` (the leading `_` causes Quarto to skip it
+during rendering), and sets `draft: true` in the backup's `index.qmd` as an
+additional safety signal. The new file is opened in the editor automatically.
+Choosing No updates only the YAML `title:` field. If the target directory
+already exists, the operation falls back to a YAML-only update with a warning.
+
+---
+
 ## Second resubmission (2026-09-08)
 
 Two post-submission bugs discovered during first interactive use have been fixed:
@@ -37,17 +54,6 @@ This was a resubmission. Two issues raised by the CRAN team were fixed:
    `file_path =`. The existing `\dontrun{}` block for IDE-based workflows is
    retained.
 
-1. **`cat()` in package function** (`R/coins_generation.R`):  
-   The `cat()` call in `generate_and_append_coins()` that printed the generated
-   COinS chunk to the console has been replaced by `message()`, which can be
-   suppressed by the user with `suppressMessages()`.
-
-2. **Writing to home filespace in examples** (`R/coins_generation.R`):  
-   A `\donttest{}` example has been added to `add_coins()` that creates all
-   required files inside `tempdir()` and passes the path explicitly via
-   `file_path =`. The existing `\dontrun{}` block for IDE-based workflows is
-   retained.
-
 ---
 
 ## Original submission note
@@ -59,11 +65,11 @@ and fixes a categories-formatting bug.
 
 ## Test environments
 
-* local macOS aarch64 (R 4.6.1), via `devtools::check()`, 2026-09-08: 0 errors | 0 warnings | 0 notes
-* win-builder (Windows R-release, 2026-08-23): 0 errors | 0 warnings | 1 note
-* win-builder (Windows R-devel, 2026-09-03): 0 errors | 0 warnings | 1 note (see below)
-* win-builder (macOS R-devel, 2026-08-23): succeeded
-* R-hub (`rhub::check_for_cran()`, 2026-08-23): all platforms succeeded
+* local macOS aarch64 (R 4.6.1), via `devtools::check()`, 2026-09-10: 0 errors | 0 warnings | 0 notes
+* win-builder (Windows R-release, 2026-09-08): 0 errors | 0 warnings | 1 note (see below)
+* win-builder (Windows R-devel, 2026-09-08): 0 errors | 0 warnings | 1 note (see below)
+* win-builder (macOS R-devel, 2026-09-08): succeeded
+* R-hub (`rhub::check_for_cran()`, 2026-09-08): all platforms succeeded
 
 ## R CMD check results
 

@@ -28,8 +28,36 @@ front matter, leaving the post body untouched.
 relies on \pkg{rstudioapi} to display the dialog. It cannot be used in a
 plain R console or non-interactive script.
 
-The \code{date-modified} field is automatically set to today's date on every
-save; all other fields reflect exactly what was entered in the dialog.
+\strong{Changing the title}
+
+When you modify the title in the dialog and click Done, you are asked
+whether to create a new post directory for the new title:
+\itemize{
+\item \strong{Yes} — copies all files from the old post directory into a new
+directory named after the new title's kebab-case slug. The original
+directory is renamed to \verb{_old-slug.bak/} and its \code{index.qmd} has
+\code{draft: true} set. The new file is opened in the editor automatically.
+\item \strong{No} — updates only the YAML \verb{title:} field; the directory name
+stays unchanged.
+}
+
+\strong{Important:} if the post has already been published, creating a new
+directory changes its URL. This will break existing links, bookmarks,
+and search-engine entries pointing to the old address.
+
+The backup directory is protected from accidental publication by two
+independent mechanisms: the leading \verb{_} in its name causes Quarto to
+skip it during rendering (consistent with Quarto's own \verb{_freeze/} and
+\verb{_site/} convention), and \code{draft: true} in the YAML acts as an
+additional human-readable signal. To recover the old title, rename the
+directory by removing the leading \verb{_} and the \code{.bak} suffix.
+
+The dialog shows a reminder in the title field as soon as it detects
+a change, so you are always aware before clicking Done.
+
+\strong{\code{date-modified}}
+
+This field is automatically set to today's date on every save.
 }
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}

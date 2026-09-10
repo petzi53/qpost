@@ -159,9 +159,22 @@ get_args <- function(defaults = NULL) {
             shinyFeedback::feedbackSuccess("title", show = TRUE, "Valid file name")
             return(list(title = input$title, slug = slug, filename = new_post_file))
         } else {
-            # Edit mode: non-empty title is sufficient
-            shinyFeedback::feedbackSuccess("title", show = TRUE, "")
-            return(list(title = input$title, slug = NA_character_, filename = NA_character_))
+            # Edit mode: non-empty title is sufficient; detect if it changed
+            title_changed <- (input$title != defaults$title)
+            if (!title_changed) {
+                shinyFeedback::feedbackSuccess("title", show = TRUE, "")
+            } else {
+                shinyFeedback::feedbackWarning(
+                    "title", show = TRUE,
+                    "Title changed \u2014 after clicking Done you will be asked whether to create a new directory"
+                )
+            }
+            return(list(
+                title         = input$title,
+                slug          = NA_character_,
+                filename      = NA_character_,
+                title_changed = title_changed
+            ))
         }
     })
 
