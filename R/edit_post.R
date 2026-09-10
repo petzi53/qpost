@@ -193,6 +193,8 @@ edit_post <- function(file_path = NULL, backup = TRUE) {
 
   # Replace only the YAML block; preserve everything after the closing ---
   content <- readr::read_file(file_path)
+  # Normalize CRLF to LF so the regex works on Windows too
+  content <- stringr::str_replace_all(content, "\r\n", "\n")
   new_content <- stringr::str_replace(
     content,
     stringr::regex("^---[\\s\\S]*?^---\\n", multiline = TRUE),

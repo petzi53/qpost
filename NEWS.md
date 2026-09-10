@@ -1,3 +1,11 @@
+# qpost 1.2.1
+
+* Fixed Windows line-ending bug in `edit_post()`: `readr::read_file()` reads in
+  binary mode so files with CRLF line endings caused the YAML-replacement regex
+  to silently fail on Windows. Line endings are now normalised (CRLF → LF)
+  immediately after reading, before the regex is applied.
+* Same CRLF normalisation applied to `add_coins()` for consistency.
+
 # qpost 1.2.0
 
 * `edit_post()` now handles title changes interactively:

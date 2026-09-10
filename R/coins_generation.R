@@ -276,6 +276,8 @@ render_coins_chunk <- function(pairs) {
 append_coins_to_file <- function(path, chunk, backup = TRUE) {
 
     existing_content <- readr::read_file(path)
+    # Normalize CRLF to LF so patterns work on Windows too
+    existing_content <- stringr::str_replace_all(existing_content, "\r\n", "\n")
     coins_present    <- stringr::str_detect(existing_content, "label: coins-code")
 
     if (coins_present) {
