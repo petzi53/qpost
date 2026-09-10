@@ -11,7 +11,6 @@ home:
 
 template:
   bootstrap: 5
-  logo: man/figures/qpost-hex.png
 
 navbar:
   right:
