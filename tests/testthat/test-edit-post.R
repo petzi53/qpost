@@ -144,6 +144,45 @@ test_that("choosing Yes creates new directory and renames old to _slug.bak/", {
               label = "backup index.qmd has draft: true")
 })
 
+# ── Tests: quotes, backslashes and $ survive the YAML replacement ─────────────
+
+test_that("special characters in YAML fields survive an edit round trip", {
+  # Regression test: str_replace() treats backslash and $ in the replacement
+  # string as ICU escape characters, which silently undid the escaping from
+  # escape_yaml_dq(). The splice-based replacement must preserve them.
+  tmp <- withr::local_tempdir()
+  qmd <- make_post_dir(tmp)
+
+  local_mocked_bindings(isAvailable  = function(...) TRUE,  .package = "rstudioapi")
+  local_mocked_bindings(documentOpen = function(...) invisible(NULL), .package = "rstudioapi")
+
+  withr::local_dir(tmp)
+
+  params <- fake_params('A "quoted" title', title_changed = FALSE)
+  params$subtitle    <- 'Back\\slash and "quotes"'
+  params$alt         <- 'Costs $5 and "more"'
+  params$description <- 'A description with "quotes" is fine unescaped.'
+
+  local_mocked_bindings(
+    get_args = function(...) params,
+    .package = "qpost"
+  )
+  local_mocked_bindings(
+    yesno = function(...) FALSE,
+    .package = "yesno"
+  )
+
+  edit_post(file_path = qmd, backup = FALSE)
+
+  header <- read_yaml_header(qmd)
+  expect_equal(header$title,    'A "quoted" title')
+  expect_equal(header$subtitle, 'Back\\slash and "quotes"')
+  expect_equal(header[["image-alt"]], 'Costs $5 and "more"')
+  # description is a block scalar: quotes need no escaping, content must match
+  expect_equal(stringr::str_trim(header$description),
+               'A description with "quotes" is fine unescaped.')
+})
+
 # ── Tests: safe fallback when new directory already exists ────────────────────
 
 test_that("choosing Yes warns and falls back to YAML-only when new dir already exists", {

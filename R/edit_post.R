@@ -195,10 +195,20 @@ edit_post <- function(file_path = NULL, backup = TRUE) {
   content <- readr::read_file(file_path)
   # Normalize CRLF to LF so the regex works on Windows too
   content <- stringr::str_replace_all(content, "\r\n", "\n")
-  new_content <- stringr::str_replace(
+  # Splice via str_locate()/str_sub() instead of str_replace(): in ICU
+  # replacement strings, backslash and $ are escape characters, which would
+  # silently undo the escaping that escape_yaml_dq() applied to the YAML.
+  yaml_loc <- stringr::str_locate(
     content,
-    stringr::regex("^---[\\s\\S]*?^---\\n", multiline = TRUE),
-    new_yaml
+    stringr::regex("^---[\\s\\S]*?^---\\n", multiline = TRUE)
+  )
+  if (is.na(yaml_loc[1, 1])) {
+    stop("Could not locate YAML front matter in: ", file_path, call. = FALSE)
+  }
+  new_content <- stringr::str_c(
+    stringr::str_sub(content, 1L, yaml_loc[1, 1] - 1L),
+    new_yaml,
+    stringr::str_sub(content, yaml_loc[1, 2] + 1L)
   )
   readr::write_file(new_content, file_path)
 

@@ -24,11 +24,14 @@ resubmission: five bug fixes and two new features.
    non-interactive context and a silent no-op. Changed to `tempfile(); dir.create(tmp)`
    for a fresh directory each run.
 
-4. **Quotation marks in user input broke the generated YAML** (`R/utils.R`):
-   Titles or other fields containing double quotes produced invalid YAML.
-   A new internal helper `escape_yaml_dq()` escapes quotation marks in all
-   text fields (title, subtitle, author, image-alt), preserving user intent
-   exactly as typed.
+4. **Quotation marks in user input broke the generated YAML** (`R/utils.R`,
+   `R/edit_post.R`): Titles or other fields containing double quotes produced
+   invalid YAML. A new internal helper `escape_yaml_dq()` escapes quotation
+   marks in all text fields (title, subtitle, author, image-alt), preserving
+   user intent exactly as typed. In addition, `edit_post()` now splices the new
+   YAML block with `str_locate()`/`str_sub()` instead of `str_replace()`: ICU
+   replacement strings treat backslash and `$` as escape characters, which
+   silently undid the quote escaping on every edit.
 
 5. **CRLF line endings broke YAML replacement on Windows** (`R/edit_post.R`,
    `R/coins_generation.R`): `readr::read_file()` reads in binary mode, so files
@@ -60,19 +63,20 @@ resubmission: five bug fixes and two new features.
 
 ## Test environments
 
-* local macOS aarch64 (R 4.6.1), via `devtools::check()`, 2026-09-16: PENDING
+* local macOS aarch64 (R 4.6.1), via `devtools::check()`, 2026-09-16: 0 errors | 0 warnings | 0 notes
 * win-builder (Windows R-release, 2026-09-16): PENDING
 * win-builder (Windows R-devel, 2026-09-16): PENDING
 * R-hub (`rhub::check_for_cran()`, 2026-09-16): PENDING
 
 ## R CMD check results
 
-PENDING
+0 errors | 0 warnings | 0 notes (local)
 
 ## Additional checks
 
-* `devtools::spell_check()`: PENDING
-* `urlchecker::url_check()`: PENDING
+* `devtools::spell_check()`: no misspellings found beyond proper nouns and
+  domain-specific terms (e.g., COinS, OpenURL, Zotero, RStudio).
+* `urlchecker::url_check()`: all URLs resolve without redirects or errors.
 
 ## Downstream dependencies
 
