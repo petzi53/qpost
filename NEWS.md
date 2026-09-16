@@ -1,14 +1,12 @@
-# qpost 1.2.1
+# qpost 1.1.0
 
-* Fixed Windows line-ending bug in `edit_post()`: `readr::read_file()` reads in
-  binary mode so files with CRLF line endings caused the YAML-replacement regex
-  to silently fail on Windows. Line endings are now normalised (CRLF → LF)
-  immediately after reading, before the regex is applied.
-* Same CRLF normalisation applied to `add_coins()` for consistency.
-
-# qpost 1.2.0
-
-* `edit_post()` now handles title changes interactively:
+* New exported function `edit_post()` for editing existing post YAML metadata via dialog
+  - Pre-populates dialog with current YAML values
+  - Auto-updates `date-modified` to today on every save
+  - Preserves post body; only replaces YAML front matter
+  - Optional `.bak` backup before modification
+  - Available as RStudio/Positron addin
+* `edit_post()` handles title changes interactively:
   - When the title is modified in the dialog, the title field shows an amber
     warning reminding the user that a directory decision will follow
   - After clicking Done, the user is asked whether to create a new post
@@ -22,19 +20,22 @@
     unchanged
   - If the target new directory already exists, the operation falls back to
     a YAML-only update with a warning
-
-# qpost 1.1.0
-
-* New exported function `edit_post()` for editing existing post YAML metadata via dialog
-  - Pre-populates dialog with current YAML values
-  - Auto-updates `date-modified` to today on every save
-  - Preserves post body; only replaces YAML front matter
-  - Optional `.bak` backup before modification
-  - Available as RStudio/Positron addin
-* Fixed critical bug: YAML rendering now correctly escapes quotation marks in user input
-  - User intent is preserved (e.g., titles with quotes render exactly as typed)
-  - New internal helper `escape_yaml_dq()` handles escaping
-  - All text fields (title, subtitle, author, image-alt) now safe for special characters
+* Bug fixes:
+  - `add_coins()` now uses `rstudioapi::getSourceEditorContext()` instead of
+    `rstudioapi::getActiveDocumentContext()`, so it resolves the target file
+    correctly even when the R Console has focus
+  - `add_coins()` auto-resolves a directory argument to the `index.qmd` file
+    inside it, with a clear error if no such file exists
+  - The `\donttest{}` example of `add_coins()` uses `tempfile()` instead of
+    `tempdir()`, so repeated runs no longer hit a stale COinS chunk and a
+    `readline()` prompt in a non-interactive context
+  - YAML rendering now correctly escapes quotation marks in user input via the
+    new internal helper `escape_yaml_dq()`; all text fields (title, subtitle,
+    author, image-alt) are safe for special characters
+  - Fixed Windows line-ending bug: `readr::read_file()` reads in binary mode,
+    so files with CRLF line endings caused the YAML-replacement regex to
+    silently fail on Windows; line endings are now normalised (CRLF -> LF)
+    immediately after reading in both `edit_post()` and `add_coins()`
 
 # qpost 1.0.0
 
