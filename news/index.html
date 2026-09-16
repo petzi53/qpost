@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">qpost</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,24 +32,6 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.2.1" id="qpost-121">qpost 1.2.1<a class="anchor" aria-label="anchor" href="#qpost-121"></a></h2>
-<ul><li>Fixed Windows line-ending bug in <code><a href="../reference/edit_post.html">edit_post()</a></code>: <code><a href="https://readr.tidyverse.org/reference/read_file.html" class="external-link">readr::read_file()</a></code> reads in binary mode so files with CRLF line endings caused the YAML-replacement regex to silently fail on Windows. Line endings are now normalised (CRLF → LF) immediately after reading, before the regex is applied.</li>
-<li>Same CRLF normalisation applied to <code><a href="../reference/add_coins.html">add_coins()</a></code> for consistency.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.2.0" id="qpost-120">qpost 1.2.0<a class="anchor" aria-label="anchor" href="#qpost-120"></a></h2>
-<ul><li>
-<code><a href="../reference/edit_post.html">edit_post()</a></code> now handles title changes interactively:
-<ul><li>When the title is modified in the dialog, the title field shows an amber warning reminding the user that a directory decision will follow</li>
-<li>After clicking Done, the user is asked whether to create a new post directory for the new title</li>
-<li>
-<strong>Yes</strong>: all files are copied to a new directory named after the new title’s kebab-case slug; the old directory is renamed to <code>_old-slug.bak/</code> (hidden from Quarto rendering by the leading <code>_</code>) and its <code>index.qmd</code> has <code>draft: true</code> set as an additional safety signal; the new file is opened automatically in the editor</li>
-<li>
-<strong>No</strong>: only the YAML <code>title:</code> field is updated; the directory name stays unchanged</li>
-<li>If the target new directory already exists, the operation falls back to a YAML-only update with a warning</li>
-</ul></li>
-</ul></div>
-    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.1.0" id="qpost-110">qpost 1.1.0<a class="anchor" aria-label="anchor" href="#qpost-110"></a></h2>
 <ul><li>New exported function <code><a href="../reference/edit_post.html">edit_post()</a></code> for editing existing post YAML metadata via dialog
 <ul><li>Pre-populates dialog with current YAML values</li>
@@ -58,14 +40,29 @@
 <li>Optional <code>.bak</code> backup before modification</li>
 <li>Available as RStudio/Positron addin</li>
 </ul></li>
-<li>Fixed critical bug: YAML rendering now correctly escapes quotation marks in user input
-<ul><li>User intent is preserved (e.g., titles with quotes render exactly as typed)</li>
-<li>New internal helper <code>escape_yaml_dq()</code> handles escaping</li>
-<li>All text fields (title, subtitle, author, image-alt) now safe for special characters</li>
+<li>
+<code><a href="../reference/edit_post.html">edit_post()</a></code> handles title changes interactively:
+<ul><li>When the title is modified in the dialog, the title field shows an amber warning reminding the user that a directory decision will follow</li>
+<li>After clicking Done, the user is asked whether to create a new post directory for the new title</li>
+<li>
+<strong>Yes</strong>: all files are copied to a new directory named after the new title’s kebab-case slug; the old directory is renamed to <code>_old-slug.bak/</code> (hidden from Quarto rendering by the leading <code>_</code>) and its <code>index.qmd</code> has <code>draft: true</code> set as an additional safety signal; the new file is opened automatically in the editor</li>
+<li>
+<strong>No</strong>: only the YAML <code>title:</code> field is updated; the directory name stays unchanged</li>
+<li>If the target new directory already exists, the operation falls back to a YAML-only update with a warning</li>
+</ul></li>
+<li>Bug fixes:
+<ul><li>
+<code><a href="../reference/add_coins.html">add_coins()</a></code> now uses <code><a href="https://rstudio.github.io/rstudioapi/reference/rstudio-editors.html" class="external-link">rstudioapi::getSourceEditorContext()</a></code> instead of <code><a href="https://rstudio.github.io/rstudioapi/reference/rstudio-editors.html" class="external-link">rstudioapi::getActiveDocumentContext()</a></code>, so it resolves the target file correctly even when the R Console has focus</li>
+<li>
+<code><a href="../reference/add_coins.html">add_coins()</a></code> auto-resolves a directory argument to the <code>index.qmd</code> file inside it, with a clear error if no such file exists</li>
+<li>The <code>\donttest{}</code> example of <code><a href="../reference/add_coins.html">add_coins()</a></code> uses <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile()</a></code> instead of <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>, so repeated runs no longer hit a stale COinS chunk and a <code><a href="https://rdrr.io/r/base/readline.html" class="external-link">readline()</a></code> prompt in a non-interactive context</li>
+<li>YAML rendering now correctly escapes quotation marks in user input via the new internal helper <code>escape_yaml_dq()</code>; all text fields (title, subtitle, author, image-alt) are safe for special characters</li>
+<li>Fixed Windows line-ending bug: <code><a href="https://readr.tidyverse.org/reference/read_file.html" class="external-link">readr::read_file()</a></code> reads in binary mode, so files with CRLF line endings caused the YAML-replacement regex to silently fail on Windows; line endings are now normalised (CRLF -&gt; LF) immediately after reading in both <code><a href="../reference/edit_post.html">edit_post()</a></code> and <code><a href="../reference/add_coins.html">add_coins()</a></code>
+</li>
 </ul></li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.0.0" id="qpost-100">qpost 1.0.0<a class="anchor" aria-label="anchor" href="#qpost-100"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.0.0" id="qpost-100">qpost 1.0.0<a class="anchor" aria-label="anchor" href="#qpost-100"></a></h2><p class="text-muted">CRAN release: 2026-09-12</p>
 <ul><li>Package renamed from <code>quartopost</code> to <code>qpost</code>
 </li>
 <li>Main function renamed from <code>quartopost()</code> to <code><a href="../reference/qpost.html">qpost()</a></code>
