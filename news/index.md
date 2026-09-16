@@ -47,6 +47,12 @@
   - YAML rendering now correctly escapes quotation marks in user input
     via the new internal helper `escape_yaml_dq()`; all text fields
     (title, subtitle, author, image-alt) are safe for special characters
+  - the YAML block replacement in
+    [`edit_post()`](https://www.peter-baumgartner.net/qpost/reference/edit_post.md)
+    now splices text with `str_locate()`/`str_sub()` instead of
+    `str_replace()`: ICU replacement strings treat backslash and `$` as
+    escape characters, which silently undid the quote escaping on every
+    edit
   - Fixed Windows line-ending bug:
     [`readr::read_file()`](https://readr.tidyverse.org/reference/read_file.html)
     reads in binary mode, so files with CRLF line endings caused the
