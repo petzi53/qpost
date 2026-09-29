@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/petzi53/qpost/blob/v1.1.0/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/petzi53/qpost/blob/master/DESCRIPTION)
 
 Baumgartner P (2026). *qpost: Create a 'Quarto' Blog Post*. R package
 version 1.1.0, <https://github.com/petzi53/qpost>.

@@ -64,8 +64,17 @@
 <div class="section level2">
 <h2 id="goal">Goal<a class="anchor" aria-label="anchor" href="#goal"></a>
 </h2>
-<p>To use this package you need to work in RStudio. The goal of <code>qpost</code> is to create and open a Quarto blog post with the appropriate YAML front matter in RStudio.</p>
-<p><code><a href="reference/qpost.html">qpost()</a></code> displays a dialog window where you can enter the data for the YAML header of a new blog post.</p>
+<p>The goal of <code>qpost</code> is to support the creation and maintenance of Quarto blog posts in RStudio and Positron. The package provides tools to create new posts with properly structured YAML front matter, edit the metadata of existing posts, and add bibliographic metadata that can be imported automatically by reference managers such as Zotero.</p>
+<p>The package provides three main functions:</p>
+<ul>
+<li>
+<code><a href="reference/qpost.html">qpost()</a></code> creates a new Quarto blog post through an interactive dialog. It collects metadata such as title, author, date, categories, and image information, creates the post directory and <code>index.qmd</code>, and optionally copies an image into the new directory.</li>
+<li>
+<code><a href="reference/edit_post.html">edit_post()</a></code> opens the YAML metadata of an existing Quarto blog post in an interactive dialog and lets you modify it while preserving the post content.</li>
+<li>
+<code><a href="reference/add_coins.html">add_coins()</a></code> adds COinS (ContextObjects in Spans) metadata to a Quarto blog post, allowing bibliographic information about the post to be recognized and imported by reference managers such as Zotero.</li>
+</ul>
+<p><code><a href="reference/qpost.html">qpost()</a></code> displays a dialog window where you can enter the metadata for a new blog post:</p>
 <div class="figure" style="text-align: center">
 <img src="reference/figures/qpost-dialog.png" alt="Dialog windows shows input field for title, author, date and subtitle" width="75%"><p class="caption">
 Dialog window for creating a blog post

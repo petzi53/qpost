@@ -2,13 +2,31 @@
 
 ## Goal
 
-To use this package you need to work in RStudio. The goal of `qpost` is
-to create and open a Quarto blog post with the appropriate YAML front
-matter in RStudio.
+The goal of `qpost` is to support the creation and maintenance of Quarto
+blog posts in RStudio and Positron. The package provides tools to create
+new posts with properly structured YAML front matter, edit the metadata
+of existing posts, and add bibliographic metadata that can be imported
+automatically by reference managers such as Zotero.
+
+The package provides three main functions:
+
+- [`qpost()`](https://www.peter-baumgartner.net/qpost/reference/qpost.md)
+  creates a new Quarto blog post through an interactive dialog. It
+  collects metadata such as title, author, date, categories, and image
+  information, creates the post directory and `index.qmd`, and
+  optionally copies an image into the new directory.
+- [`edit_post()`](https://www.peter-baumgartner.net/qpost/reference/edit_post.md)
+  opens the YAML metadata of an existing Quarto blog post in an
+  interactive dialog and lets you modify it while preserving the post
+  content.
+- [`add_coins()`](https://www.peter-baumgartner.net/qpost/reference/add_coins.md)
+  adds COinS (ContextObjects in Spans) metadata to a Quarto blog post,
+  allowing bibliographic information about the post to be recognized and
+  imported by reference managers such as Zotero.
 
 [`qpost()`](https://www.peter-baumgartner.net/qpost/reference/qpost.md)
-displays a dialog window where you can enter the data for the YAML
-header of a new blog post.
+displays a dialog window where you can enter the metadata for a new blog
+post:
 
 ![Dialog windows shows input field for title, author, date and
 subtitle](reference/figures/qpost-dialog.png)
