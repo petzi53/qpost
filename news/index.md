@@ -2,6 +2,8 @@
 
 ## qpost 1.1.0
 
+CRAN release: 2026-09-16
+
 - New exported function
   [`edit_post()`](https://www.peter-baumgartner.net/qpost/reference/edit_post.md)
   for editing existing post YAML metadata via dialog
