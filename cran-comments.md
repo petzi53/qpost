@@ -64,13 +64,24 @@ resubmission: five bug fixes and two new features.
 ## Test environments
 
 * local macOS aarch64 (R 4.6.1), via `devtools::check()`, 2026-09-16: 0 errors | 0 warnings | 0 notes
-* win-builder (Windows R-release, 2026-09-16): PENDING
-* win-builder (Windows R-devel, 2026-09-16): PENDING
-* R-hub (`rhub::check_for_cran()`, 2026-09-16): PENDING
+* win-builder (Windows R-release, 2026-09-16): 0 errors | 0 warnings | 1 note (see below)
+* win-builder (Windows R-devel, 2026-09-16): 0 errors | 0 warnings | 1 note (see below)
+* R-hub (`rhub::rhub_check()` on linux, m1-san, macos, macos-arm64, windows,
+  2026-09-16): all platforms succeeded
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 notes (local)
+0 errors | 0 warnings | 1 note (local: 0 notes)
+
+* checking CRAN incoming feasibility ... NOTE
+  Days since last update: 4
+
+  We ask for an exception to the usual update cadence: this update fixes
+  bugs discovered during first interactive use of the version accepted on
+  2026-09-12. Two of them break basic functionality (add_coins() fails when
+  the R Console has focus; edit_post() produces invalid YAML for titles
+  containing quotation marks), so we would like to get the fixes to users
+  quickly rather than wait out the customary interval.
 
 ## Additional checks
 
